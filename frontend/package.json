@@ -1,0 +1,58 @@
+{
+  "name": "vue3-vite-ts",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "eslint": "eslint --ext .js,.jsx,.ts,.tsx,.vue src",
+    "lint": "lint-staged"
+  },
+  "dependencies": {
+    "daas-ui": "0.0.57",
+    "vue": "^3.5.8"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.4.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@eslint/js": "^9.9.0",
+    "@types/node": "^22.1.0",
+    "@types/qs": "^6.9.15",
+    "@typescript-eslint/eslint-plugin": "^8.0.1",
+    "@typescript-eslint/parser": "^8.0.1",
+    "@vitejs/plugin-vue": "^5.1.2",
+    "@vueuse/motion": "^2.2.3",
+    "axios": "^1.7.3",
+    "commitlint": "^19.4.0",
+    "echarts": "^5.5.1",
+    "element-plus": "^2.8.0",
+    "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-define-config": "^2.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-vue": "^9.27.0",
+    "lint-staged": "^15.2.8",
+    "lodash": "^4.17.21",
+    "mockjs": "^1.1.0",
+    "path": "^0.12.7",
+    "pinia": "^2.2.1",
+    "pinia-plugin-persistedstate": "^3.2.1",
+    "prettier": "^3.3.3",
+    "qs": "^6.13.0",
+    "sass": "^1.77.8",
+    "typescript": "^5.5.4",
+    "unplugin-auto-import": "^0.18.2",
+    "unplugin-vue-components": "^0.27.3",
+    "unplugin-vue-define-options": "^1.4.9",
+    "vite": "^5.4.0",
+    "vite-plugin-vue-setup-extend": "^0.4.0",
+    "vue-eslint-parser": "^9.4.3",
+    "vue-router": "^4.4.3",
+    "vue-tsc": "^2.0.29"
+  },
+  "lint-staged": {
+    "src/**": "eslint"
+  }
+}

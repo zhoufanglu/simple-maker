@@ -1,0 +1,48 @@
+/* 按钮 */
+$button_noraml_bgcolor: #0099a7; //按钮
+$button_noraml_hover_bgcolor: #007a85; //按钮hover
+$button_red_bgcolor: #e8645f; //按钮
+$button_red_hover_bgcolor: #b9504c; //按钮hover
+
+/* 色彩 */
+// 主色
+$color_black: #2c3241;
+$color_blue: #0099a7;
+$color_blue_light: #12c09b;
+//页面背景色
+$color_page_bg: #f9f9f9;
+
+// 辅色
+$color_status: #e8645f; //状态
+$color_tip: #12c09b; //消息提示
+$color_notice: #f9b8b5; //通知
+$color_notice_bg: #fef7f7; //通知底色
+$color_bg: #f2f6f6; //底色
+$color_hover: #e8f1f1; //hover色
+$color_priceDetal: #f9b8b5; //价格明细
+$color_priceDetal_bg: #fffbf7; //价格明细底色
+$color_select_bg: #f7f8f9; //选项框底色
+
+//字体颜色
+$color_title: #2c3241; //标题
+$color_subTitle: #5d6884; //副标题
+$color_tag: #b0b5bd; //时间、箱型等标注信息
+
+//分割线、边框
+$color_border: #d3dae2;
+
+//分值颜色
+.p-danger-color {
+  color: $danger;
+}
+.p-warning-color {
+  color: $warning;
+}
+.p-normal-color {
+  color: $balanced;
+}
+
+.link {
+  cursor: pointer;
+  color: $theme;
+}
