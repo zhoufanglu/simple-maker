@@ -1,6 +1,7 @@
 # 易排
 > 一个自定义排名的,库
-> 世面上已经有类似的了 [参考](https://tiermaker.com/single-use-tier-list/)
+> 世面上已经有类似的了   
+> [参考](https://tiermaker.com/single-use-tier-list/)
 > 想做一个中文版的
 
 # 目录介绍
