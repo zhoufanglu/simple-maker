@@ -1,22 +1,17 @@
 import type { RouteRecordRaw } from 'vue-router'
-const layout = () => import('@/layout/index.vue')
-const login = () => import('@/views/login/index.vue')
-import errorPage from '@/router/modules/error-page'
-import test from '@/router/modules/test'
+const home = () => import('@/views/home/index.vue')
 /**
- * 基础路由
+ * 基础路由 base route
  */
 const basePage: RouteRecordRaw[] = [
   {
     path: '/',
-    // redirect: '/index',
-    component: layout,
-    meta: { title: '' },
-    children: [...test, ...errorPage],
+    redirect: '/home',
   },
   {
-    path: '/login',
-    component: login,
+    path: '/home',
+    component: home,
+    meta: { title: 'home' },
   },
 ]
 

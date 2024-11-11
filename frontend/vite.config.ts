@@ -50,6 +50,7 @@ export default ({ mode, command }: ConfigEnv) => {
     },
     server: {
       host: '0.0.0.0',
+      port: 4444
     },
     build: {
       sourcemap: false,
