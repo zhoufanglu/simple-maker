@@ -1,9 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Title from '@/views/home/components/Title.vue'
+import ChooseFiles from '@/views/home/components/ChooseFiles.vue'
+</script>
 <template>
-  <div class=""> home </div>
+  <div class="p-home">
+    <Title></Title>
+    <ChooseFiles></ChooseFiles>
+  </div>
 </template>
 
 <style scoped lang="scss">
-  .test {
+  .p-home {
+    padding: 40px;
   }
 </style>

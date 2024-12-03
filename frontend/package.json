@@ -11,7 +11,6 @@
     "lint": "lint-staged"
   },
   "dependencies": {
-    "daas-ui": "0.0.57",
     "vue": "^3.5.8"
   },
   "devDependencies": {
@@ -27,7 +26,6 @@
     "axios": "^1.7.3",
     "commitlint": "^19.4.0",
     "echarts": "^5.5.1",
-    "element-plus": "^2.8.0",
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-define-config": "^2.1.0",
@@ -36,6 +34,7 @@
     "lint-staged": "^15.2.8",
     "lodash": "^4.17.21",
     "mockjs": "^1.1.0",
+    "naive-ui": "^2.40.3",
     "path": "^0.12.7",
     "pinia": "^2.2.1",
     "pinia-plugin-persistedstate": "^3.2.1",
