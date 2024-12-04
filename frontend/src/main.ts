@@ -12,6 +12,7 @@ import {
   NInput,
   NGradientText,
   NImage,
+  NMessageProvider,
 } from 'naive-ui'
 
 // 自定义指令
@@ -20,7 +21,7 @@ import directivesTool from '@/directives'
 const app = createApp(App)
 
 const naive = create({
-  components: [NButton, NInput, NGradientText, NImage],
+  components: [NButton, NInput, NGradientText, NImage, NMessageProvider],
 })
 
 app.use(MotionPlugin).use(naive).use(router).use(pinia).use(directivesTool).mount('#app')

@@ -2,6 +2,9 @@
   import Draggable from 'vuedraggable'
   import { RankingItem } from '../types'
   import Motion from '@/components/motion'
+  import { useMessage } from 'naive-ui'
+
+  const message = useMessage()
 
   const rankingRows = ref<RankingItem[]>([])
   const defaultColorList = [
@@ -16,7 +19,7 @@
     '#00FA9A', // 薄荷绿
     '#9dc3b3', // 薄荷绿
   ]
-  const defaultLevelList = ['S', 'A', 'B', 'C', 'D']
+  const defaultLevelList = ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
   const defaultImgList = [
     'https://api.dicebear.com/7.x/adventurer/svg?seed=1',
     'https://api.dicebear.com/7.x/adventurer/svg?seed=2',
@@ -40,6 +43,19 @@
       })
     }
   }
+
+  function handleCreate() {
+    const len = rankingRows.value.length
+    if (len > 9) {
+      message.info('最多10个！')
+      return
+    }
+    rankingRows.value.push({
+      levelName: defaultLevelList[len],
+      items: [],
+      bgColor: defaultColorList[len],
+    })
+  }
 </script>
 <template>
   <div class="content">
@@ -48,7 +64,8 @@
         {{ i }}
       </li>
     </ul>-->
-    <draggable
+    <Draggable
+      style="height: auto"
       handle=".handle"
       ghost-class="ghost"
       animation="200"
@@ -78,14 +95,18 @@
           </draggable>
           <!--          </li>-->
           <!--?action-->
-          <li class="action-item drag-handle">
-            <Motion>
+          <Motion>
+            <li class="action-item drag-handle">
               <i class="iconfont fa fa-align-justify handle">&#xe6c4;</i>
-            </Motion>
-          </li>
+              <i class="iconfont fa fa-align-justify handle">&#xe616;</i>
+            </li>
+          </Motion>
         </ul>
       </template>
-    </draggable>
+    </Draggable>
+    <div class="add-action" @click="handleCreate">
+      <i class="iconfont">&#xe613;</i>
+    </div>
     <!--
 <ul v-for="rank in rankingRows" :key="rank.levelName" class="rank-row">
   <li
@@ -115,13 +136,14 @@
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 16px;
+    box-sizing: border-box;
     .rank-row {
       display: flex;
       align-items: center;
       margin-bottom: 10px;
       .level-item {
-        height: 80px;
-        width: 80px;
+        height: 100px;
+        width: 100px;
         @include vertical-center;
         font-size: 24px;
         font-weight: bold;
@@ -136,8 +158,8 @@
       .img-row {
         // border: solid 1px red !important;
         background-color: #fafafa;
-        height: 80px;
-        width: 100%;
+        height: 100px;
+        width: calc(100% - 150px - 16px);
         box-sizing: border-box;
         border-radius: 8px;
         padding: 8px;
@@ -154,21 +176,47 @@
           border-radius: 8px;
           box-sizing: border-box;
           background: white;
-          //  transition: all 0.3s ease;
+          height: 80px;
+          width: 80px;
           &:hover {
-            // transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
           }
         }
       }
       .action-item {
-        width: 40px;
         height: 80px;
+        padding: 0 10px;
         @include vertical-center;
+        flex-direction: column;
+        transition: all 0.3s ease;
         i {
-          font-size: 24px;
+          font-size: 20px;
           cursor: pointer;
+          &:hover {
+            color: #5386ed;
+          }
         }
+        i:last-child {
+          font-size: 24px;
+          margin-top: 6px;
+        }
+      }
+    }
+    .add-action {
+      width: 100%;
+      height: 30px;
+      border: 2px dashed #e8e8e8;
+      border-radius: 4px;
+      @include vertical-center;
+      transition: all 0.3s ease;
+      &:hover {
+        color: #5386ed;
+        border: 2px dashed #5386ed;
+        cursor: pointer;
+      }
+      i {
+        font-size: 20px;
+        cursor: pointer;
       }
     }
   }
