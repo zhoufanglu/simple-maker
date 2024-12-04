@@ -50,7 +50,8 @@
     "vue-eslint-parser": "^9.4.3",
     "vue-grid-layout": "^2.4.0",
     "vue-router": "^4.4.3",
-    "vue-tsc": "^2.0.29"
+    "vue-tsc": "^2.0.29",
+    "vuedraggable": "^4.1.0"
   },
   "lint-staged": {
     "src/**": "eslint"

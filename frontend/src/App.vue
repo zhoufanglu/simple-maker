@@ -13,4 +13,9 @@
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+  .app {
+    height: 100vh;
+    width: 100vw;
+  }
+</style>
