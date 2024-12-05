@@ -171,6 +171,9 @@
           cursor: pointer;
           display: none;
           box-shadow: 0 4px 8px rgba(255, 255, 255, 0.15);
+          background-color: white;
+          border-radius: 2px;
+          transition: all 0.3s ease;
           &:hover {
             color: #5386ed;
           }

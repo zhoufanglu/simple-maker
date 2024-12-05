@@ -30,9 +30,9 @@
   rankingRows.value = []
 
   initRankingRows()
-  /*  rankingRows.value[0].items.push({ path: defaultImgList[0] })
+  // test
+  /* rankingRows.value[0].items.push({ path: defaultImgList[0] })
   rankingRows.value[0].items.push({ path: defaultImgList[1] }) */
-  // console.log(27, rankingRows.value)
 
   function initRankingRows() {
     for (let i = 0; i < 4; i++) {
@@ -166,7 +166,7 @@
       .img-row {
         // border: solid 1px red !important;
         background-color: #fafafa;
-        height: 100px;
+        min-height: 100px;
         width: calc(100% - 150px - 16px);
         box-sizing: border-box;
         border-radius: 8px;
