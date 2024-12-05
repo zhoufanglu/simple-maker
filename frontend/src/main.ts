@@ -4,6 +4,7 @@ import router from '@/router'
 import pinia from '@/store/index'
 import '@/style.scss' // 引入下 不然全局scss不生效(https://github.com/vitejs/vite/issues/5682#issuecomment-968713998)
 import { MotionPlugin } from '@vueuse/motion'
+import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 import {
   // create naive ui
   create,
@@ -24,4 +25,11 @@ const naive = create({
   components: [NButton, NInput, NGradientText, NImage, NMessageProvider],
 })
 
-app.use(MotionPlugin).use(naive).use(router).use(pinia).use(directivesTool).mount('#app')
+app
+  .use(MotionPlugin)
+  .use(naive)
+  .use(router)
+  .use(pinia)
+  .use(directivesTool)
+  .use(autoAnimatePlugin)
+  .mount('#app')

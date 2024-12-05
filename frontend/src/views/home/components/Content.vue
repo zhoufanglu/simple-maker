@@ -68,6 +68,7 @@
 <template>
   <div class="content">
     <Draggable
+      v-auto-animate
       style="height: auto"
       handle=".handle"
       ghost-class="ghost"

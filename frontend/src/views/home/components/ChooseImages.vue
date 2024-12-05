@@ -30,6 +30,7 @@
 <template>
   <div class="choose-images">
     <Draggable
+      v-auto-animate
       class="img-row"
       itemKey="path"
       group="img-row"
