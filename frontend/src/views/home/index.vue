@@ -1,14 +1,21 @@
 <script setup lang="ts">
   import Title from '@/views/home/components/Title.vue'
-  import ChooseFiles from '@/views/home/components/ChooseImages.vue'
+  import ChooseImages from '@/views/home/components/ChooseImages.vue'
   import Content from '@/views/home/components/Content.vue'
+  import { RankingItem } from '@/views/home/types'
+
+  const ChooseImagesRef = ref<InstanceType<typeof ChooseImages>>()
+
+  const handleDelRow = (row: RankingItem) => {
+    ChooseImagesRef.value.addImages(row.items)
+  }
 </script>
 <template>
   <div class="p-home">
     <Title></Title>
     <div class="container">
-      <Content></Content>
-      <ChooseFiles></ChooseFiles>
+      <content @handle-del-row="handleDelRow"></content>
+      <choose-images ref="ChooseImagesRef"></choose-images>
     </div>
   </div>
 </template>

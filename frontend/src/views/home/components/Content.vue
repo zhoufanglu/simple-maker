@@ -56,14 +56,17 @@
       bgColor: defaultColorList[len],
     })
   }
+
+  const emits = defineEmits(['handleDelRow'])
+
+  const handleDelRow = (index: number) => {
+    console.log(rankingRows.value[index])
+    emits('handleDelRow', rankingRows.value[index])
+    rankingRows.value.splice(index, 1)
+  }
 </script>
 <template>
   <div class="content">
-    <!--    <ul style="height: 100px">
-      <li v-for="(i, index) in rankingRows" :key="index">
-        {{ i }}
-      </li>
-    </ul>-->
     <Draggable
       style="height: auto"
       handle=".handle"
@@ -72,14 +75,15 @@
       :list="rankingRows"
       item-key="levelName"
     >
-      <template #item="{ element: rank }">
+      <template #item="{ element: rank, index }">
         <ul class="rank-row">
           <!--?level-item-->
           <li class="level-item" :style="{ backgroundColor: rank.bgColor }">
-            <div class="level-name">{{ rank.levelName }}</div>
+            <Motion>
+              <div class="level-name">{{ rank.levelName }}</div>
+            </Motion>
           </li>
           <!--?img-list-->
-          <!--          <li class="img-row">-->
           <!--!行内img拖动-->
           <draggable
             class="img-row"
@@ -93,12 +97,13 @@
               <n-image :src="img.path" preview-disabled width="80" class="img-item"> </n-image>
             </template>
           </draggable>
-          <!--          </li>-->
           <!--?action-->
           <Motion>
             <li class="action-item drag-handle">
               <i class="iconfont fa fa-align-justify handle">&#xe6c4;</i>
-              <i class="iconfont fa fa-align-justify handle">&#xe616;</i>
+              <i class="iconfont fa fa-align-justify handle" @click="handleDelRow(index)"
+                >&#xe616;</i
+              >
             </li>
           </Motion>
         </ul>
@@ -153,6 +158,8 @@
         .level-name {
           // text-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 1);
           text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+          font-size: 40px;
+          font-family: ALIMAMAFONT;
         }
       }
       .img-row {
