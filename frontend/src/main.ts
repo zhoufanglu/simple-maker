@@ -14,6 +14,10 @@ import {
   NGradientText,
   NImage,
   NMessageProvider,
+  NUpload,
+  NModal,
+  NTag,
+  NAvatar,
 } from 'naive-ui'
 
 // 自定义指令
@@ -22,7 +26,17 @@ import directivesTool from '@/directives'
 const app = createApp(App)
 
 const naive = create({
-  components: [NButton, NInput, NGradientText, NImage, NMessageProvider],
+  components: [
+    NButton,
+    NInput,
+    NGradientText,
+    NImage,
+    NMessageProvider,
+    NUpload,
+    NModal,
+    NTag,
+    NAvatar,
+  ],
 })
 
 app

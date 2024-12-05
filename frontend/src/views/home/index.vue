@@ -25,7 +25,7 @@
     height: 100vh;
     width: 100%;
     box-sizing: border-box;
-    padding: 40px 10% 10% 10%;
+    padding: 20px;
     overflow-y: auto;
     .container {
       // border: dashed 1px black;

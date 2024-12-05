@@ -87,6 +87,7 @@
     "WritableComputedRef": true,
     "closeAllMessage": true,
     "message": true,
-    "appendParamsToUrl": true
+    "appendParamsToUrl": true,
+    "debounce": true
   }
 }
