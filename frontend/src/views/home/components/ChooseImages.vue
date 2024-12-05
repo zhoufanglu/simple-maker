@@ -103,7 +103,13 @@
       </div>
     </Motion>
     <!--?一键导入弹窗-->
-    <n-modal v-model:show="showModal" preset="dialog" title="Dialog">
+    <n-modal
+      v-model:show="showModal"
+      class="one-click-model"
+      :bordered="false"
+      preset="dialog"
+      title="Dialog"
+    >
       <template #header>
         <div>选择你需要的图片集</div>
       </template>
@@ -134,12 +140,12 @@
     margin-top: 10px;
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     .img-row {
       // border: solid 1px red !important;
       background-color: #fafafa;
       min-height: 116px;
-      max-height: 120px;
+      // max-height: 120px;
       width: 100%;
       overflow-y: auto;
       box-sizing: border-box;
@@ -220,14 +226,22 @@
       }
     }
   }
-  .one-modal-box {
-    padding: 20px;
-    display: flex;
-    gap: 8px;
-    margin-top: 8px;
-    border-radius: 8px;
-    .n-tag {
-      cursor: pointer;
+</style>
+<style lang="scss">
+  .one-click-model {
+    width: 468px;
+    position: fixed;
+    top: 20%;
+    left: calc(50% - 234px);
+    .one-modal-box {
+      padding: 20px;
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      border-radius: 8px;
+      .n-tag {
+        cursor: pointer;
+      }
     }
   }
 </style>

@@ -14,6 +14,7 @@
 </script>
 <template>
   <div class="p-title">
+    <!--    <n-button type="info" style="">预览</n-button>-->
     <Motion>
       <n-input
         v-show="inputStatus === 'input'"
@@ -21,6 +22,11 @@
         v-model:value="title"
         type="text"
         size="large"
+        @keyup.enter="
+          () => {
+            inputStatus = 'text'
+          }
+        "
         @blur="
           () => {
             inputStatus = 'text'

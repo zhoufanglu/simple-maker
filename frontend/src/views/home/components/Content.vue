@@ -35,7 +35,7 @@
   // console.log(27, rankingRows.value)
 
   function initRankingRows() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 4; i++) {
       rankingRows.value.push({
         levelName: defaultLevelList[i],
         items: [],
