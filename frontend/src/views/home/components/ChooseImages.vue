@@ -4,6 +4,7 @@
   import { ImgItem } from '@/views/home/types'
   import type { UploadFileInfo } from 'naive-ui'
   import { debounce } from '@/tools'
+  import { useOneClickImport } from '@/views/home/hooks/useOneClickImport'
 
   const images = ref<ImgItem[]>([
     /*    {
@@ -29,7 +30,6 @@
     fileList: Array<UploadFileInfo>
     event?: Event
   }) => {
-    console.log(31, options.fileList)
     const images: ImgItem[] = options.fileList.map((file) => {
       return {
         path: URL.createObjectURL(file!.file),
@@ -40,22 +40,19 @@
   }
 
   /** ********************一键导入***********************/
-  const showModal = ref(false)
-  const openOneClick = () => {
-    showModal.value = true
-  }
+  const { variables } = useOneClickImport()
 
-  const imageFiles: any = import.meta.glob('@/assets/imgs/lol/*.png', { eager: true })
-  const handleImportOneClickImgs = () => {
-    const imageUrls: ImgItem[] = Object.values(imageFiles).map((module) => {
-      // 每个模块是 { default: URL }
-      return {
-        path: module!.default || module,
+  const openOneClick = () => {
+    variables.visible = true
+  }
+  const handleImportOneClickImgs = (imgs: string[]) => {
+    addImages(
+      imgs.map((imgPath) => ({
         name: '',
-      }
-    })
-    addImages(imageUrls)
-    showModal.value = false
+        path: imgPath,
+      })),
+    )
+    variables.visible = false
   }
 
   const debouncedHandleUploadChange = debounce(handleUploadChange, 300)
@@ -83,6 +80,7 @@
         </div>
       </template>
     </Draggable>
+    <!--?自定义导入-->
     <Motion class="import-box">
       <n-upload
         :show-file-list="false"
@@ -99,12 +97,12 @@
         <span>键</span>
         <span>导</span>
         <span>入</span>
-        <i class="iconfont">&#xe613;</i>
+        <!--        <i class="iconfont">&#xe613;</i>-->
       </div>
     </Motion>
     <!--?一键导入弹窗-->
     <n-modal
-      v-model:show="showModal"
+      v-model:show="variables.visible"
       class="one-click-model"
       :bordered="false"
       preset="dialog"
@@ -114,18 +112,17 @@
         <div>选择你需要的图片集</div>
       </template>
       <div class="one-modal-box">
-        <n-tag @click="handleImportOneClickImgs">
-          英雄联盟
+        <n-tag
+          v-for="(collect, index) in variables.imgCollections"
+          :key="index"
+          @click="handleImportOneClickImgs(collect.imgs)"
+        >
+          {{ collect.name }}
           <template #avatar>
-            <n-avatar
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAC9ElEQVR4ARWNA6w1RxiGn9md3Vlds7Zt27YVFLFrRI0aJ43ZuLZt27g2js9Z70zP/+FF9Mj7bzp4YY+JoaFcW0jp0ex0SNIE19nRK2wEmBw/8nHcfjMlhRYMBj4zS0lLTgwOjD35Sjvc7g0QqmXiXoKxDJZwCVyIxR6UjCDtBEFOlVsYY5gaaHLHOV6fIe1yqwtbrV256jy44nBDe7NNFGqe+sTlO+tskqGD0ek81FdAjkGrjdl+hqIaKaUTTqHcdTjhGt5YmOdQ5wnuuPVINmLDt++dxPgpZ9Hstei1J8AJ0aWF8UNUexLXj5BxmmLyHtQ+Ixvbn7mVgkRbpCpETu+EDnykAIzEOAUi0ZhqA9PSdLoNZK3ZwBgbUo1l+yA0jijAAk8nBIGiWZYY10d6IXoAdNwAnVHfbiAjlaP9fUEdhe4VSEfhuxITFxTbNbJWlzg34FiIKMB0M8g0eVkR+g7SIqESY8B+iPr72JMGLUMqXSFMiR8pVKWIRgSBkqwuujC1Oyx7OHYPWeU5fQyYBOxhSp2SZhlOGGHsgMwawBkKKe2cxtISxZff4leLjI6PUNFA2jrHaA1qBLJx0AUIgQpdGjMf0/38WAaPPJR6O8Z8+wOD9Tc456AFvls5CuX8g/SVg6W7MNL/dJg+vP85cljipZ+SfvYrtW92xg4GOWSoxeP3dPkyOZV3a/uj1PdIRwmEGoBRBzP/F0JVtDspaW2G+y5U1OIU5c2x75Tg6MOmOfTUA3j40RGcoTGCoWEklkaIYdgs2CV/jzNPHiLKe7i65IZrD2J62EFXGkuUjO41wpcLml//25nJ4Q7SsZGlVuS9efjpUXbZ+ztmkp3455MW2h6lMglRIPEGQixP4f1Y8MlPFUyfg248T9zaQPqeLcenD4HJg/m3uoyfP9Do3h9UzsEIq4ucmAKTIYYcECVSa4bELBNugvKUlB3j1R67S5ZxtobjQhXXKeMtCj2P1lAUGioNGKRjYVNQaMPISMRKM2z9D3yKcee9oww3AAAAAElFTkSuQmCC"
-            />
+            <n-avatar :src="collect.logo" />
           </template>
         </n-tag>
       </div>
-      <!--      <template #action>
-        <n-button @click="handleImportOneClickImgs">确定</n-button>
-      </template>-->
     </n-modal>
   </div>
 </template>

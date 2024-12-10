@@ -8,3 +8,11 @@ export interface RankingItem {
   items: ImgItem[]
   bgColor: string
 }
+
+export interface ChooseImageItem {
+  logo: string
+  name: string
+  imgs: string[]
+}
+
+export type FolderName = 'lol' | 'mapleStory'
