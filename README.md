@@ -1,8 +1,11 @@
-# 易排
+# 易排 - simple-maker
 > 一个自定义排名的,库
-> 世面上已经有类似的了   
+> 世面上已经有类似的了
 > [参考](https://tiermaker.com/single-use-tier-list/)
-> 想做一个中文版的
+> 想做一个简易版的
+
+## 界面
+![home](src/imgs/introduce/home.png)
 
 # 目录介绍
 - axure-rp - 原型目录
@@ -12,4 +15,7 @@
 # 难点TODO
 - [ ] 图片文件存储选择
 - [x] 自定义列拖动
-- [ ] 如何收益
+- [ ] 自定义等级
+
+# 优化
+- [issues-1] 拖动过程中删除错位 [](https://github.com/zhoufanglu/simple-maker/issues/1)
