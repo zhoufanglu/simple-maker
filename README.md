@@ -5,7 +5,7 @@
 > 想做一个简易版的
 
 ## 界面
-![home](src/imgs/introduce/home.png)
+![home](https://github.com/zhoufanglu/simple-maker/blob/dev-1.0/frontend/src/assets/imgs/introduce/home.png)
 
 # 目录介绍
 - axure-rp - 原型目录
@@ -18,4 +18,4 @@
 - [ ] 自定义等级
 
 # 优化
-- [issues-1] 拖动过程中删除错位 [](https://github.com/zhoufanglu/simple-maker/issues/1)
+- [issue-1](https://github.com/zhoufanglu/simple-maker/issues/1) - 拖动过程中删除错位 
