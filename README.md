@@ -12,10 +12,12 @@
 - frontend - 前端目录
 - server - 后端目录
 
-# 难点TODO
+# TODO
 - [ ] 图片文件存储选择
 - [x] 自定义列拖动
 - [ ] 自定义等级
+- [ ] 预览功能
+- [ ] 中英文功能
 
 # 优化
 - [issue-1](https://github.com/zhoufanglu/simple-maker/issues/1) - 拖动过程中删除错位 

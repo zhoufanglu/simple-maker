@@ -18,6 +18,10 @@ import {
   NModal,
   NTag,
   NAvatar,
+  NTabs,
+  NTabPane,
+  NTimeline,
+  NTimelineItem,
 } from 'naive-ui'
 
 // 自定义指令
@@ -36,6 +40,10 @@ const naive = create({
     NModal,
     NTag,
     NAvatar,
+    NTabs,
+    NTabPane,
+    NTimeline,
+    NTimelineItem,
   ],
 })
 

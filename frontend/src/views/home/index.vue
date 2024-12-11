@@ -2,6 +2,7 @@
   import Title from '@/views/home/components/Title.vue'
   import ChooseImages from '@/views/home/components/ChooseImages.vue'
   import Content from '@/views/home/components/Content.vue'
+  import Header from '@/views/home/components/Header.vue'
   import { RankingItem } from '@/views/home/types'
 
   const ChooseImagesRef = ref<InstanceType<typeof ChooseImages>>()
@@ -12,6 +13,7 @@
 </script>
 <template>
   <div class="p-home">
+    <Header></Header>
     <Title></Title>
     <div class="container">
       <content @handle-del-row="handleDelRow"></content>
@@ -25,8 +27,9 @@
     height: 100vh;
     width: 100%;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     overflow-y: auto;
+    //border: solid 1px red;
     .container {
       // border: dashed 1px black;
       border-radius: 10px;
