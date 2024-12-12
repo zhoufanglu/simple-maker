@@ -1,0 +1,58 @@
+//主色调
+$theme: #5386ed;
+// 主题类型 1、亮色-$main-light  2、深色-$main-dark
+$main-light:(
+  theme: #5386ed,
+  bg_theme: #ffffff
+);
+
+$main-dark:(
+  theme: white,
+  bg_theme: #000000
+);
+
+// 总的主题map
+$main-themes: (
+  light: $main-light,
+  dark: $main-dark
+);
+// 定义theme-map变量, 是map-get($main-themes, light/dark) 这个map
+$theme-map: null;
+// vue 写多了，觉得$theme是双向绑定的了。。
+/*body{
+  [data-theme="light"] & {
+    $theme: red!global;
+  }
+  [data-theme="dark"] & {
+    $theme: black!global;
+  }
+}*/
+
+
+//换肤函数
+@mixin themify() {
+  // 将main-themes中规则放入theme-map
+  @each $theme-name, $map in $main-themes {
+   /* @debug $theme-name; // light/dark
+    @debug $map; // map*/
+    // !global 表示覆盖原来的
+    [data-theme="#{$theme-name}"] & {
+      $theme-map: () !global;
+      // 根据主题命名，循环出对应作用域下的样式键值对
+      @each $key, $value in $map {
+        $theme-map: map-merge(
+            $theme-map,
+            (
+              $key: $value,
+            )
+        ) !global;
+      }
+      // 表示包含下面函数 themed(), 类似于插槽
+      @content;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

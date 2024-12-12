@@ -1,0 +1,16 @@
+// 定义混合指令， 切换主题
+@mixin themeify {
+  @each $theme-name, $theme-map in $themes {
+    // !global 把局部变量强升为全局变量
+    $theme-map: $theme-map !global;
+    [data-theme="#{$theme-name}"] & {
+      @content;
+    }
+  }
+}
+
+
+// 获取map中的值
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

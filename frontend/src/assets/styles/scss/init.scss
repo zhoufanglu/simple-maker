@@ -1,0 +1,73 @@
+html {
+  overflow: hidden;
+}
+@font-face {
+  font-family: ALIMAMAFONT;
+  src: url('/font/ALIMAMASHUHEITI-BOLD.ttf') format('truetype');
+}
+body,
+ol,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+th,
+td,
+dl,
+dd,
+form,
+fieldset,
+legend,
+input,
+textarea,
+select {
+  margin: 0;
+  padding: 0;
+}
+body {
+  height: 100%;
+  font: 16px '微软雅黑', 'Arial Narrow', HELVETICA;
+  -webkit-text-size-adjust: 100%;
+  color: #666666;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    '微软雅黑', Arial, sans-serif;
+}
+a {
+  color: #2d374b;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+em {
+  font-style: normal;
+}
+li {
+  list-style: none;
+}
+img {
+  border: 0;
+  vertical-align: middle;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+p {
+  word-wrap: break-word;
+}
+//移除input number 箭头
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
