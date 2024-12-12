@@ -3,7 +3,6 @@
   import ChooseImages from '@/views/home/components/ChooseImages.vue'
   import Content from '@/views/home/components/Content.vue'
   import Header from '@/views/home/components/Header.vue'
-  import Motion from '@/components/motion'
   import { RankingItem } from '@/views/home/types'
   import { useHomeStore } from '@/store/home'
 
@@ -13,16 +12,31 @@
   const handleDelRow = (row: RankingItem) => {
     ChooseImagesRef.value.addImages(row.items)
   }
+
+  // ? 模拟一个下面的占位box
+  const pinImgsBoxHeight = ref(0)
+  const handleImageBoxHeightChange = (height: number, isPin: boolean) => {
+    pinImgsBoxHeight.value = isPin ? height + 10 : 0
+  }
 </script>
 <template>
   <div class="p-home">
+    {{ pinImgsBoxHeight }}
     <Header></Header>
     <Title></Title>
     <div class="container">
       <content @handle-del-row="handleDelRow"></content>
-      <Motion>
-        <choose-images v-show="homeStore.modeType === 'edit'" ref="ChooseImagesRef"></choose-images>
-      </Motion>
+      <choose-images
+        v-show="homeStore.modeType === 'edit'"
+        ref="chooseImagesRef"
+        @handle-image-box-height-change="handleImageBoxHeightChange"
+      ></choose-images>
+      <div
+        class="pin-box"
+        :style="{
+          height: pinImgsBoxHeight + 'px',
+        }"
+      ></div>
     </div>
   </div>
 </template>

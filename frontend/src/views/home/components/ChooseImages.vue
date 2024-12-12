@@ -5,8 +5,10 @@
   import type { UploadFileInfo } from 'naive-ui'
   import { debounce } from '@/tools'
   import { useOneClickImport } from '@/views/home/hooks/useOneClickImport'
+  import { usePin } from '@/views/home/hooks/usePin'
+  import { defineEmits } from 'vue'
 
-  /**********************图片list模块***********************/
+  /** ********************图片list模块***********************/
   const images = ref<ImgItem[]>([
     /*    {
       path: 'https://api.dicebear.com/7.x/adventurer/svg?seed=10',
@@ -63,15 +65,17 @@
 
   const debouncedHandleUploadChange = debounce(handleUploadChange, 300)
 
+  /** ********************pin***********************/
+  const emits = defineEmits(['handleImageBoxHeightChange'])
+  const chooseImagesRef = ref<Element | null>(null)
+  const { isPin } = usePin(emits, chooseImagesRef)
+
   defineExpose({
     addImages,
   })
-
-  /**********************pin***********************/
-  const isPin = ref(true)
 </script>
 <template>
-  <div class="choose-images" :class="isPin ? 'pin-choose-images' : null">
+  <div ref="chooseImagesRef" class="choose-images" :class="isPin ? 'pin-choose-images' : null">
     <Draggable
       v-auto-animate
       class="img-row"
@@ -118,8 +122,8 @@
     </Motion>
     <!--?Pin按钮-->
     <div class="pin-btn" @click="isPin = !isPin">
-      <i class="pin iconfont" v-show="!isPin">&#xe864;</i>
-      <i class="pin-fill iconfont" v-show="isPin">&#xe863;</i>
+      <i v-show="!isPin" class="pin iconfont">&#xe864;</i>
+      <i v-show="isPin" class="pin-fill iconfont">&#xe863;</i>
     </div>
     <!--?一键导入弹窗-->
     <n-modal
@@ -159,6 +163,8 @@
     width: 100%;
     display: flex;
     align-items: flex-start;
+    position: relative;
+    transition: all 0.3s ease;
     .img-row {
       // border: solid 1px red !important;
       background-color: #fafafa;
@@ -218,6 +224,7 @@
       // width: 58px;
       .import-btn {
         height: 116px;
+        width: 58px;
         border: 2px dashed #e8e8e8;
         border-radius: 4px;
         box-sizing: border-box;
@@ -257,13 +264,21 @@
       i {
         font-size: 26px;
       }
+      .pin-fill {
+        color: #5386ed;
+      }
     }
   }
   .pin-choose-images {
     position: fixed;
     bottom: 0;
     left: 0;
-    border: solid 1px red;
+    //border: solid 1px red;
+    z-index: 9999;
+    box-shadow: -2px -2px 1px 0px rgba(0, 91, 211, 0.3);
+    .img-row {
+      max-height: 300px;
+    }
   }
 </style>
 <style lang="scss">
@@ -282,5 +297,9 @@
         cursor: pointer;
       }
     }
+  }
+  .n-upload {
+    // border: solid 1px red;
+    width: auto;
   }
 </style>
