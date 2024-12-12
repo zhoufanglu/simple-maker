@@ -3,8 +3,10 @@
   import { RankingItem } from '../types'
   import Motion from '@/components/motion'
   import { useMessage } from 'naive-ui'
+  import { useHomeStore } from '@/store/home'
 
   const message = useMessage()
+  const homeStore = useHomeStore()
 
   const rankingRows = ref<RankingItem[]>([])
   const defaultColorList = [
@@ -66,7 +68,13 @@
   }
 </script>
 <template>
-  <div class="content">
+  <div
+    v-auto-animate
+    class="content"
+    :style="{
+      height: homeStore.modeType === 'edit' ? '100%' : 'calc(100vh - 170px)',
+    }"
+  >
     <Draggable
       v-auto-animate
       style="height: auto"
@@ -87,6 +95,10 @@
           <!--?img-list-->
           <!--!行内img拖动-->
           <draggable
+            :style="{
+              width:
+                homeStore.modeType === 'edit' ? 'calc(100% - 150px)' : 'calc(100% - 150px + 16px)',
+            }"
             class="img-row"
             ghost-class="ghost"
             animation="200"
@@ -99,7 +111,7 @@
             </template>
           </draggable>
           <!--?action-->
-          <Motion>
+          <Motion v-if="homeStore.modeType === 'edit'">
             <li class="action-item drag-handle">
               <i class="iconfont fa fa-align-justify handle">&#xe6c4;</i>
               <i class="iconfont fa fa-align-justify handle" @click="handleDelRow(index)"
@@ -110,29 +122,9 @@
         </ul>
       </template>
     </Draggable>
-    <div class="add-action" @click="handleCreate">
+    <div v-if="homeStore.modeType === 'edit'" class="add-action" @click="handleCreate">
       <i class="iconfont">&#xe613;</i>
     </div>
-    <!--
-<ul v-for="rank in rankingRows" :key="rank.levelName" class="rank-row">
-  <li
-    class="level-item"
-    :style="{
-      backgroundColor: rank.bgColor,
-    }"
-  >
-    <div class="level-name">{{ rank.levelName }}</div>
-  </li>
-  <li class="img-row">
-    <div v-for="imgPath in rank.items" :key="imgPath.path"></div>
-  </li>
-  <li class="action-item">
-    <Motion>
-      <i class="iconfont">&#xe6c4;</i>
-    </Motion>
-  </li>
-</ul>
--->
   </div>
 </template>
 
@@ -143,11 +135,13 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 16px;
     box-sizing: border-box;
+    transition: all 0.3s ease;
     .rank-row {
       display: flex;
       align-items: center;
       margin-bottom: 10px;
       .level-item {
+        flex-shrink: 0;
         height: 100px;
         width: 100px;
         @include vertical-center;
@@ -167,7 +161,7 @@
         // border: solid 1px red !important;
         background-color: #fafafa;
         min-height: 100px;
-        width: calc(100% - 150px - 16px);
+        // width: calc(100% - 150px - 16px);
         box-sizing: border-box;
         border-radius: 8px;
         padding: 8px;
@@ -176,9 +170,8 @@
         flex-wrap: wrap;
         gap: 8px;
         border: 2px dashed #e8e8e8;
-        transition: all 0.3s ease;
+        transition: all 0.3s ease !important;
         .img-item {
-          // border: solid 1px red;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
           cursor: grab;
           padding: 8px;

@@ -88,6 +88,7 @@
     "closeAllMessage": true,
     "message": true,
     "appendParamsToUrl": true,
-    "debounce": true
+    "debounce": true,
+    "useHomeStore": true
   }
 }

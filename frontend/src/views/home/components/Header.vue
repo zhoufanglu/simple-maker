@@ -1,9 +1,18 @@
 <script setup lang="ts">
+  import { useHomeStore } from '@/store/home'
+  import Motion from '@/components/motion'
+
+  const wxQR = new URL('@/assets/imgs/pay/wxQR.JPG', import.meta.url)
   const goGithub = () => {
     window.open('https://github.com/zhoufanglu/simple-maker/tree/main', '_blank')
   }
 
-  const modalVisible = ref(true)
+  const homeStore = useHomeStore()
+  const handelSwitchModel = () => {
+    homeStore.switchModeType()
+  }
+
+  const modalVisible = ref(false)
 
   const rewards = [
     {
@@ -22,8 +31,23 @@
   <div class="p-header">
     <div class="left"></div>
     <div class="right">
-      <n-button quaternary type="info" @click="modalVisible = true"> coffee </n-button>
-      <n-button quaternary type="info" @click="goGithub"> github </n-button>
+      <Motion>
+        <!--?展示/编辑状态-->
+        <n-button quaternary type="info" @click="handelSwitchModel">
+          <i
+            class="iconfont mode-icon"
+            v-html="homeStore.modeType === 'edit' ? '&#xe655;' : '&#xec86;'"
+          ></i>
+        </n-button>
+        <!--?coffee-->
+        <n-button quaternary type="info" @click="modalVisible = true">
+          <i class="iconfont">&#xe60a;</i>
+        </n-button>
+        <!--?github-->
+        <n-button quaternary type="info" @click="goGithub">
+          <i class="iconfont">&#xe85a;</i>
+        </n-button>
+      </Motion>
     </div>
     <!--? buy coffee-->
     <n-modal
@@ -41,7 +65,7 @@
       <div class="buy-coffee-content">
         <n-tabs type="line" animated>
           <n-tab-pane name="二维码" tab="二维码">
-            <n-image :height="562 / 2" :width="424 / 2" src="src/assets/imgs/pay/wxQR.JPG" />
+            <n-image :height="562 / 2" :width="424 / 2" :src="wxQR" />
           </n-tab-pane>
           <n-tab-pane name="打赏记录" tab="打赏记录">
             <n-timeline>
@@ -70,6 +94,13 @@
     justify-content: space-between;
     align-items: center;
     .right {
+      i {
+        color: #5386ed;
+        font-size: 24px;
+      }
+      .mode-icon {
+        font-size: 26px;
+      }
     }
   }
 </style>

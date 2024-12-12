@@ -4,8 +4,10 @@
   import Content from '@/views/home/components/Content.vue'
   import Header from '@/views/home/components/Header.vue'
   import { RankingItem } from '@/views/home/types'
+  import { useHomeStore } from '@/store/home'
 
   const ChooseImagesRef = ref<InstanceType<typeof ChooseImages>>()
+  const homeStore = useHomeStore()
 
   const handleDelRow = (row: RankingItem) => {
     ChooseImagesRef.value.addImages(row.items)
@@ -17,7 +19,7 @@
     <Title></Title>
     <div class="container">
       <content @handle-del-row="handleDelRow"></content>
-      <choose-images ref="ChooseImagesRef"></choose-images>
+      <choose-images v-show="homeStore.modeType === 'edit'" ref="ChooseImagesRef"></choose-images>
     </div>
   </div>
 </template>
