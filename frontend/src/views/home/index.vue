@@ -3,6 +3,7 @@
   import ChooseImages from '@/views/home/components/ChooseImages.vue'
   import Content from '@/views/home/components/Content.vue'
   import Header from '@/views/home/components/Header.vue'
+  import Motion from '@/components/motion'
   import { RankingItem } from '@/views/home/types'
   import { useHomeStore } from '@/store/home'
 
@@ -19,7 +20,9 @@
     <Title></Title>
     <div class="container">
       <content @handle-del-row="handleDelRow"></content>
-      <choose-images v-show="homeStore.modeType === 'edit'" ref="ChooseImagesRef"></choose-images>
+      <Motion>
+        <choose-images v-show="homeStore.modeType === 'edit'" ref="ChooseImagesRef"></choose-images>
+      </Motion>
     </div>
   </div>
 </template>

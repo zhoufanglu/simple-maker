@@ -4,6 +4,7 @@
   import Motion from '@/components/motion'
   import { useMessage } from 'naive-ui'
   import { useHomeStore } from '@/store/home'
+  import InputTextEnter from '@/components/InputTextEnter.vue'
 
   const message = useMessage()
   const homeStore = useHomeStore()
@@ -76,7 +77,6 @@
     }"
   >
     <Draggable
-      v-auto-animate
       style="height: auto"
       handle=".handle"
       ghost-class="ghost"
@@ -88,9 +88,9 @@
         <ul class="rank-row">
           <!--?level-item-->
           <li class="level-item" :style="{ backgroundColor: rank.bgColor }">
-            <Motion>
-              <div class="level-name">{{ rank.levelName }}</div>
-            </Motion>
+            <!--TODO: 这里双向绑定会有问题-->
+            <!--            <input-text-enter v-model:value="rank.levelName" from="LevelItem"></input-text-enter>-->
+            <input-text-enter :value="rank.levelName" from="LevelItem"></input-text-enter>
           </li>
           <!--?img-list-->
           <!--!行内img拖动-->
@@ -151,10 +151,6 @@
         border-radius: 8px;
         margin-right: 8px;
         .level-name {
-          // text-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 1);
-          text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
-          font-size: 40px;
-          font-family: ALIMAMAFONT;
         }
       }
       .img-row {

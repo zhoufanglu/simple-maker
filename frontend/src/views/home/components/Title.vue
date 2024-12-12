@@ -1,46 +1,13 @@
 <script setup lang="ts">
   import Motion from '@/components/motion'
+  import InputTextEnter from '@/components/InputTextEnter.vue'
 
   const title = ref('custom title 🖊️')
-  const inputStatus = ref<'input' | 'text'>('text')
-  const titleRef = ref<HTMLInputElement>()
-
-  const handleTextClick = () => {
-    inputStatus.value = 'input'
-    nextTick(() => {
-      titleRef.value.focus()
-    })
-  }
 </script>
 <template>
   <div class="p-title">
-    <!--    <n-button type="info" style="">预览</n-button>-->
     <Motion>
-      <n-input
-        v-show="inputStatus === 'input'"
-        ref="titleRef"
-        v-model:value="title"
-        type="text"
-        size="large"
-        @keyup.enter="
-          () => {
-            inputStatus = 'text'
-          }
-        "
-        @blur="
-          () => {
-            inputStatus = 'text'
-          }
-        "
-      />
-      <n-gradient-text
-        v-show="inputStatus === 'text'"
-        font-size="50"
-        type="info"
-        @click="handleTextClick"
-      >
-        {{ title }}
-      </n-gradient-text>
+      <input-text-enter v-model:value="title" from="Title"></input-text-enter>
     </Motion>
   </div>
 </template>

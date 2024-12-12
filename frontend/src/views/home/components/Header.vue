@@ -1,7 +1,9 @@
 <script setup lang="ts">
   import { useHomeStore } from '@/store/home'
   import Motion from '@/components/motion'
+  import { useMessage } from 'naive-ui'
 
+  const message = useMessage()
   const wxQR = new URL('@/assets/imgs/pay/wxQR.JPG', import.meta.url)
   const goGithub = () => {
     window.open('https://github.com/zhoufanglu/simple-maker/tree/main', '_blank')
@@ -10,6 +12,7 @@
   const homeStore = useHomeStore()
   const handelSwitchModel = () => {
     homeStore.switchModeType()
+    message.success(`已经切换为${homeStore.modeType == 'edit' ? '【编辑】' : '【预览】'}模式`)
   }
 
   const modalVisible = ref(false)
