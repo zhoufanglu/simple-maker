@@ -2,7 +2,7 @@
   import Motion from '@/components/motion'
   import InputTextEnter from '@/components/InputTextEnter.vue'
 
-  const title = ref('custom title 🖊️')
+  const title = ref('simple maker title 🖊️')
 </script>
 <template>
   <div class="p-title">

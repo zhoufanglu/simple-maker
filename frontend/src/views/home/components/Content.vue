@@ -77,6 +77,7 @@
     }"
   >
     <Draggable
+      v-auto-animate
       style="height: auto"
       handle=".handle"
       ghost-class="ghost"
@@ -135,7 +136,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 16px;
     box-sizing: border-box;
-    transition: all 0.3s ease;
+    //transition: all 0.3s ease;
     .rank-row {
       display: flex;
       align-items: center;
@@ -154,7 +155,6 @@
         }
       }
       .img-row {
-        // border: solid 1px red !important;
         background-color: #fafafa;
         min-height: 100px;
         // width: calc(100% - 150px - 16px);
@@ -166,7 +166,7 @@
         flex-wrap: wrap;
         gap: 8px;
         border: 2px dashed #e8e8e8;
-        transition: all 0.3s ease !important;
+        // transition: all 0.3s ease;
         .img-item {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
           cursor: grab;
