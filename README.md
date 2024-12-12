@@ -21,3 +21,6 @@
 
 # 优化
 - [issue-1](https://github.com/zhoufanglu/simple-maker/issues/1) - 拖动过程中删除错位 
+
+# release
+- [release-1.0](https://github.com/zhoufanglu/simple-maker/releases/tag/v1.0) - 2021.07.07
