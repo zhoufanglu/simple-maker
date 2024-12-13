@@ -23,6 +23,7 @@
     "@typescript-eslint/eslint-plugin": "^8.0.1",
     "@typescript-eslint/parser": "^8.0.1",
     "@vitejs/plugin-vue": "^5.1.2",
+    "@vueuse/core": "^12.0.0",
     "@vueuse/motion": "^2.2.3",
     "axios": "^1.7.3",
     "commitlint": "^19.4.0",
