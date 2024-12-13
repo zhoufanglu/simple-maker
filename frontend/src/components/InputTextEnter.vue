@@ -24,6 +24,7 @@
       v-model:value="text"
       type="text"
       size="large"
+      placeholder=" "
       @keyup.enter="
         () => {
           inputState = 'text'
@@ -47,8 +48,6 @@
     <span
       v-show="inputState === 'text' && from === 'LevelItem'"
       class="text-span"
-      font-size="50"
-      type="info"
       @click="handleTextClick"
     >
       {{ text }}
@@ -68,12 +67,22 @@
       min-height: 60px;
     }
     .text-span {
-      display: inline-block;
-      min-width: 50px;
+      display: block;
+      flex-wrap: wrap;
+      min-width: 60px;
+      line-height: 44px;
       min-height: 60px;
-      @include vertical-center;
+      max-height: 100px;
+      max-width: 100px;
+      // border: solid 1px red;
       text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
       font-size: 40px;
+      // font-size: calc(40px - 0.5px * var(--text-length));
+      word-wrap: break-word;
+      white-space: normal;
+      text-align: center; /* 居中文字 */
+      overflow-wrap: break-word; /* 强制长单词换行 */
+      line-break: auto; /* 处理中文换行 */
       font-family: ALIMAMAFONT;
     }
   }

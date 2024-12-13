@@ -12,20 +12,20 @@
   const homeStore = useHomeStore()
   const handelSwitchModel = () => {
     homeStore.switchModeType()
-    message.success(`已经切换为${homeStore.modeType == 'edit' ? '【编辑】' : '【预览】'}模式`)
+    message.success(`切换为${homeStore.modeType == 'edit' ? '【编辑】' : '【预览】'}模式`)
   }
 
   const modalVisible = ref(false)
 
   const rewards = [
     {
-      name: '拾不忆',
-      money: '9.9',
-      time: '2024-12-11',
+      name: '*川',
+      money: '0.10',
+      time: '2024-12-12',
     },
     {
-      name: 'test',
-      money: '9.9',
+      name: '拾*忆',
+      money: '9.90',
       time: '2024-12-11',
     },
   ]
