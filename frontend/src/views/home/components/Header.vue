@@ -55,6 +55,16 @@
       tip: 'Github',
       click: () => goGithub(),
     },
+    {
+      icon: '&#xe882;',
+      tip: '加入qq讨论群',
+      click: () => {
+        window.open(
+          'https://qm.qq.com/cgi-bin/qm/qr?k=hKBXKNil-4hCYjqwXZYXk6x55pjLVg7l&jump_from=webapi&authKey=jeeNxVzsPVLxFjAOBOE8zI9R3pLAc8lUnXS5aScIoGSXIjPLLok9deDZV2hI1Syv',
+          '_blank',
+        )
+      },
+    },
   ])
 
   // 打赏列表
