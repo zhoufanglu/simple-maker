@@ -11,6 +11,7 @@
     "lint": "lint-staged"
   },
   "dependencies": {
+    "html2canvas": "^1.4.1",
     "vue": "^3.5.8"
   },
   "devDependencies": {
@@ -26,6 +27,7 @@
     "@vueuse/motion": "^2.2.3",
     "axios": "^1.7.3",
     "commitlint": "^19.4.0",
+    "dom-to-image": "^2.6.0",
     "echarts": "^5.5.1",
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",

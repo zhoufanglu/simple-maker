@@ -102,7 +102,6 @@ declare module 'vue' {
     readonly appendParamsToUrl: UnwrapRef<typeof import('./tools/index')['appendParamsToUrl']>
     readonly closeAllMessage: UnwrapRef<typeof import('./tools/message')['closeAllMessage']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
-    readonly confirmDialog: UnwrapRef<typeof import('./tools/confirmDialog')['default']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly createPinia: UnwrapRef<typeof import('pinia')['createPinia']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>

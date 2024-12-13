@@ -36,6 +36,14 @@
         }
       "
     />
+    <!--    <span
+      v-if="from === 'Title'"
+      v-show="inputState === 'text'"
+      style="font-size: 50px; color: #5386ed"
+      @click="handleTextClick"
+    >
+      {{ text }}</span
+    >-->
     <n-gradient-text
       v-if="from === 'Title'"
       v-show="inputState === 'text'"
@@ -70,7 +78,7 @@
       display: block;
       flex-wrap: wrap;
       min-width: 60px;
-      line-height: 44px;
+      // line-height: 44px;
       min-height: 60px;
       max-height: 100px;
       max-width: 100px;

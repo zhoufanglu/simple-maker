@@ -3,6 +3,8 @@
   import InputTextEnter from '@/components/InputTextEnter.vue'
 
   const title = ref('simple maker title 🖊️')
+
+  defineExpose({ title })
 </script>
 <template>
   <div class="p-title">

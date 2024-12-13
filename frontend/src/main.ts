@@ -22,6 +22,7 @@ import {
   NTabPane,
   NTimeline,
   NTimelineItem,
+  NSpin,
 } from 'naive-ui'
 
 // 自定义指令
@@ -44,6 +45,7 @@ const naive = create({
     NTabPane,
     NTimeline,
     NTimelineItem,
+    NSpin,
   ],
 })
 

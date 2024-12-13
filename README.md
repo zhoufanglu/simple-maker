@@ -28,3 +28,4 @@
 
 - [release-1.1](https://github.com/zhoufanglu/simple-maker/releases/tag/dev-1.0) -
 - [x] 底部图片选择模块，增加pin功能
+- [x] 增加导出为图片功能

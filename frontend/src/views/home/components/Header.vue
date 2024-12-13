@@ -3,10 +3,21 @@
   import Motion from '@/components/motion'
   import { useMessage } from 'naive-ui'
 
+  const emits = defineEmits(['handleDownLoad'])
+
   const message = useMessage()
   const wxQR = new URL('@/assets/imgs/pay/wxQR.JPG', import.meta.url)
   const goGithub = () => {
     window.open('https://github.com/zhoufanglu/simple-maker/tree/main', '_blank')
+  }
+
+  const handleDownLoad = async () => {
+    // 切换为预览模式 再进行下载
+    if (homeStore.modeType === 'edit') {
+      homeStore.switchModeType()
+    }
+    await sleep(500)
+    emits('handleDownLoad')
   }
 
   const homeStore = useHomeStore()
@@ -46,6 +57,10 @@
         <n-button quaternary type="info" @click="modalVisible = true">
           <i class="iconfont">&#xe60a;</i>
         </n-button>
+        <!--?download-->
+        <n-button quaternary type="info" @click="handleDownLoad">
+          <i class="iconfont">&#xe66c;</i>
+        </n-button>
         <!--?github-->
         <n-button quaternary type="info" @click="goGithub">
           <i class="iconfont">&#xe85a;</i>
@@ -77,7 +92,7 @@
                 :key="index"
                 type="info"
                 :title="i.name"
-                :content="`¥${i.money}`"
+                :content="`¥ ${i.money}`"
                 :time="i.time"
               />
             </n-timeline>
@@ -120,6 +135,11 @@
       // border: solid 1px red;
       .n-tab-pane {
         @include vertical-center;
+        .n-timeline-item-content__content {
+          color: #5386ed;
+          font-weight: bolder;
+          font-family: ALIMAMAFONT;
+        }
       }
     }
   }
