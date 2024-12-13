@@ -21,7 +21,6 @@
 </script>
 <template>
   <div class="p-home">
-    {{ pinImgsBoxHeight }}
     <Header></Header>
     <Title></Title>
     <div class="container">
