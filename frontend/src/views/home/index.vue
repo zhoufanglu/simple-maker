@@ -5,14 +5,15 @@
   import Header from '@/views/home/components/Header.vue'
   import { RankingItem } from '@/views/home/types'
   import { useHomeStore } from '@/store/home'
+  // @ts-ignore
   import domtoimage from 'dom-to-image'
   import { useMessage } from 'naive-ui'
 
-  const ChooseImagesRef = ref<InstanceType<typeof ChooseImages>>()
+  const chooseImagesRef = ref<InstanceType<typeof ChooseImages>>()
   const homeStore = useHomeStore()
 
   const handleDelRow = (row: RankingItem) => {
-    ChooseImagesRef.value.addImages(row.items)
+    chooseImagesRef.value.addImages(row.items)
   }
 
   // ? 模拟一个下面的占位box

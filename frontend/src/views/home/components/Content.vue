@@ -78,13 +78,7 @@
   }
 </script>
 <template>
-  <div
-    v-auto-animate
-    class="content"
-    :style="{
-      height: homeStore.modeType === 'edit' ? '100%' : 'calc(100vh - 170px)',
-    }"
-  >
+  <div v-auto-animate class="content">
     <Draggable
       v-auto-animate
       style="height: auto"
