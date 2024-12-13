@@ -7,6 +7,8 @@
 
   const message = useMessage()
   const wxQR = new URL('@/assets/imgs/pay/wxQR.JPG', import.meta.url)
+  const homeStore = useHomeStore()
+
   const goGithub = () => {
     window.open('https://github.com/zhoufanglu/simple-maker/tree/main', '_blank')
   }
@@ -19,15 +21,43 @@
     await sleep(500)
     emits('handleDownLoad')
   }
-
-  const homeStore = useHomeStore()
   const handelSwitchModel = () => {
     homeStore.switchModeType()
     message.success(`切换为${homeStore.modeType == 'edit' ? '【编辑】' : '【预览】'}模式`)
+    rightOperateButtons.value[0].icon = homeStore.modeType === 'edit' ? '&#xe655;' : '&#xec86;'
+    rightOperateButtons.value[0].tip = `切换为${homeStore.modeType === 'edit' ? '预览' : '编辑'}模式`
   }
 
   const modalVisible = ref(false)
 
+  const rightOperateButtons = ref([
+    {
+      icon: homeStore.modeType === 'edit' ? '&#xe655;' : '&#xec86;',
+      tip: `切换为${homeStore.modeType === 'edit' ? '预览' : '编辑'}模式`,
+      click: () => {
+        handelSwitchModel()
+      },
+    },
+    {
+      icon: '&#xe60a;',
+      tip: '哄冻尼戴斯噶？你要请我喝咖啡？',
+      click: () => {
+        modalVisible.value = true
+      },
+    },
+    {
+      icon: '&#xe66c;',
+      tip: '导出为图片',
+      click: () => handleDownLoad(),
+    },
+    {
+      icon: '&#xe85a;',
+      tip: 'Github',
+      click: () => goGithub(),
+    },
+  ])
+
+  // 打赏列表
   const rewards = [
     {
       name: '*川',
@@ -43,28 +73,16 @@
 </script>
 <template>
   <div class="p-header">
-    <div class="left"></div>
+    <div class="left"> </div>
     <div class="right">
       <Motion>
-        <!--?展示/编辑状态-->
-        <n-button quaternary type="info" @click="handelSwitchModel">
-          <i
-            class="iconfont mode-icon"
-            v-html="homeStore.modeType === 'edit' ? '&#xe655;' : '&#xec86;'"
-          ></i>
-        </n-button>
-        <!--?coffee-->
-        <n-button quaternary type="info" @click="modalVisible = true">
-          <i class="iconfont">&#xe60a;</i>
-        </n-button>
-        <!--?download-->
-        <n-button quaternary type="info" @click="handleDownLoad">
-          <i class="iconfont">&#xe66c;</i>
-        </n-button>
-        <!--?github-->
-        <n-button quaternary type="info" @click="goGithub">
-          <i class="iconfont">&#xe85a;</i>
-        </n-button>
+        <n-tooltip v-for="(btn, index) in rightOperateButtons" :key="index" :delay="500">
+          <template #trigger>
+            <n-button quaternary type="info" @click="btn.click()">
+              <i class="iconfont" v-html="btn.icon"></i> </n-button
+          ></template>
+          {{ btn.tip }}
+        </n-tooltip>
       </Motion>
     </div>
     <!--? buy coffee-->

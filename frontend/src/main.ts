@@ -23,6 +23,7 @@ import {
   NTimeline,
   NTimelineItem,
   NSpin,
+  NTooltip,
 } from 'naive-ui'
 
 // 自定义指令
@@ -46,6 +47,7 @@ const naive = create({
     NTimeline,
     NTimelineItem,
     NSpin,
+    NTooltip,
   ],
 })
 
