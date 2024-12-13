@@ -17,6 +17,11 @@ const useOneClickImport = () => {
       name: '冒险岛',
       imgs: getImgPathList('mapleStory'),
     },
+    {
+      logo: getImageUrl('wukong'),
+      name: '黑神话-悟空',
+      imgs: getImgPathList('wukong'),
+    },
   ]
 
   function getImgPathList(folderName: FolderName) {
@@ -28,6 +33,9 @@ const useOneClickImport = () => {
         break
       case 'mapleStory':
         imageFiles = import.meta.glob('@/assets/imgs/mapleStory/*.png', { eager: true })
+        break
+      case 'wukong':
+        imageFiles = import.meta.glob('@/assets/imgs/wukong/*.png', { eager: true })
         break
     }
     return Object.values(imageFiles).map((module) => module.default)

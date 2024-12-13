@@ -15,4 +15,4 @@ export interface ChooseImageItem {
   imgs: string[]
 }
 
-export type FolderName = 'lol' | 'mapleStory'
+export type FolderName = 'lol' | 'mapleStory' | 'wukong'

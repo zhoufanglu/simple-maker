@@ -5,6 +5,7 @@
   import { useMessage } from 'naive-ui'
   import { useHomeStore } from '@/store/home'
   import InputTextEnter from '@/components/InputTextEnter.vue'
+  import { defineEmits } from 'vue'
 
   const message = useMessage()
   const homeStore = useHomeStore()
@@ -67,6 +68,14 @@
     emits('handleDelRow', rankingRows.value[index])
     rankingRows.value.splice(index, 1)
   }
+
+  const hexToRgba = (hex: string, alpha = 0.2) => {
+    hex = hex.replace('#', '')
+    const r = parseInt(hex.substring(0, 2), 16)
+    const g = parseInt(hex.substring(2, 4), 16)
+    const b = parseInt(hex.substring(4, 6), 16)
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`
+  }
 </script>
 <template>
   <div
@@ -99,6 +108,7 @@
             :style="{
               width:
                 homeStore.modeType === 'edit' ? 'calc(100% - 150px)' : 'calc(100% - 150px + 16px)',
+              borderColor: hexToRgba(rank.bgColor),
             }"
             class="img-row"
             ghost-class="ghost"
@@ -170,7 +180,7 @@
         .img-item {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
           cursor: grab;
-          padding: 8px;
+          // padding: 8px;
           border-radius: 8px;
           box-sizing: border-box;
           background: white;

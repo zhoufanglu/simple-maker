@@ -205,7 +205,7 @@
         .img-item {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
           cursor: grab;
-          padding: 8px;
+          // padding: 8px;
           border-radius: 8px;
           box-sizing: border-box;
           background: white;
