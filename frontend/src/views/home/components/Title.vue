@@ -2,7 +2,7 @@
   import Motion from '@/components/motion'
   import InputTextEnter from '@/components/InputTextEnter.vue'
 
-  const title = ref('simple maker title 🖊️')
+  const title = ref('创建你的等级列表 🖊️')
 
   defineExpose({ title })
 </script>
