@@ -26,8 +26,8 @@
 - [x] 自定义等级
 - [x] 预览功能
 
-- [release-1.1](https://github.com/zhoufanglu/simple-maker/releases/tag/dev-1.1) -
-- feat: 底部图片选择模块，增加pin功能
-- feat: 增加导出为图片功能
-- refactor: 重构一键导入功能
-- fix: https://github.com/zhoufanglu/simple-maker/issues/3
+- [release-1.1](https://github.com/zhoufanglu/simple-maker/releases/tag/dev-1.1) - 2024-12-16
+feat: 底部图片选择模块，增加pin功能
+- [x] feat: 增加导出为图片功能
+- [x] refactor: 重构一键导入功能
+- [x] fix: https://github.com/zhoufanglu/simple-maker/issues/3
