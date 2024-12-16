@@ -83,7 +83,9 @@
 </script>
 <template>
   <div class="p-header">
-    <div class="left"> </div>
+    <div class="left">
+      <!--      <img class="logo" src="/img/simple-logo-all.svg" @click="goGithub()" />-->
+    </div>
     <div class="right">
       <Motion>
         <n-tooltip v-for="(btn, index) in rightOperateButtons" :key="index" :delay="500">
@@ -139,6 +141,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .left {
+      .logo {
+        position: relative;
+        top: 20px;
+        left: -20px;
+        width: 70px;
+        height: 70px;
+        cursor: pointer;
+      }
+    }
     .right {
       i {
         color: #5386ed;
