@@ -9,6 +9,7 @@ const usePin = (
 ) => {
   const isPin = ref(false)
   const { height } = useElementSize(chooseImagesRef)
+
   watch([height, isPin], () => {
     emits('handleImageBoxHeightChange', height.value, isPin.value)
   })

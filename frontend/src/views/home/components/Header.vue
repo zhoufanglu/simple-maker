@@ -2,6 +2,7 @@
   import { useHomeStore } from '@/store/home'
   import Motion from '@/components/motion'
   import { useMessage } from 'naive-ui'
+  import { defineEmits } from 'vue'
 
   const emits = defineEmits(['handleDownLoad'])
 

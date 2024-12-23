@@ -67,7 +67,8 @@
 
   /** ********************pin***********************/
   const emits = defineEmits(['handleImageBoxHeightChange'])
-  const chooseImagesRef = ref<Element | null>(null)
+  const chooseImagesRef = ref<HTMLElement | null>(null)
+  // @ts-ignore
   const { isPin } = usePin(emits, chooseImagesRef)
 
   defineExpose({
