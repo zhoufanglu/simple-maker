@@ -21,14 +21,12 @@
 - [issue-1](https://github.com/zhoufanglu/simple-maker/issues/1) - 拖动过程中删除错位 
 
 # release
-## [release-1.0](https://github.com/zhoufanglu/simple-maker/releases/tag/1.0) 
-- 2024-12-12
+- [release-1.0](https://github.com/zhoufanglu/simple-maker/releases/tag/dev-1.0) - 2024-12-12
 - [x] 自定义列拖动
 - [x] 自定义等级
 - [x] 预览功能
 
-## [release-1.1](https://github.com/zhoufanglu/simple-maker/releases/tag/1.1) 
-- 2024-12-16  
+- [release-1.1](https://github.com/zhoufanglu/simple-maker/releases/tag/dev-1.1) - 2024-12-16  
 - [x] feat: 底部图片选择模块，增加pin功能
 - [x] feat: 增加导出为图片功能
 - [x] refactor: 重构一键导入功能
