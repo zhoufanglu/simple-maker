@@ -20,6 +20,9 @@
 # 优化
 - [issue-1](https://github.com/zhoufanglu/simple-maker/issues/1) - 拖动过程中删除错位 
 
+# 自动发布脚本 - 前端
+- ./frontend/deploy.sh
+
 # release
 - [release-1.0](https://github.com/zhoufanglu/simple-maker/releases/tag/dev-1.0) - 2024-12-12
 - [x] 自定义列拖动
