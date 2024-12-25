@@ -24,6 +24,8 @@
     '#9dc3b3', // 薄荷绿
   ]
   const defaultLevelList = ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+  const deletedLevelList = []
+  // 模拟图片数据
   const defaultImgList = [
     'https://api.dicebear.com/7.x/adventurer/svg?seed=1',
     'https://api.dicebear.com/7.x/adventurer/svg?seed=2',
@@ -54,18 +56,28 @@
       message.info('最多10个！')
       return
     }
-    rankingRows.value.push({
-      levelName: defaultLevelList[len],
-      items: [],
-      bgColor: defaultColorList[len],
-    })
+    if (deletedLevelList.length !== 0) {
+      const colorIndex = defaultLevelList.findIndex((item) => item === deletedLevelList[0])
+      rankingRows.value.push({
+        levelName: deletedLevelList.shift(),
+        items: [],
+        bgColor: defaultColorList[colorIndex],
+      })
+    } else {
+      rankingRows.value.push({
+        levelName: defaultLevelList[len],
+        items: [],
+        bgColor: defaultColorList[len],
+      })
+    }
   }
 
   const emits = defineEmits(['handleDelRow'])
 
   const handleDelRow = (index: number) => {
-    console.log(rankingRows.value[index])
-    emits('handleDelRow', rankingRows.value[index])
+    const curRow: RankingItem = rankingRows.value[index]
+    deletedLevelList.push(curRow.levelName)
+    emits('handleDelRow', curRow)
     rankingRows.value.splice(index, 1)
   }
 
