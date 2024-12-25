@@ -10,7 +10,8 @@
   const message = useMessage()
   const homeStore = useHomeStore()
 
-  const rankingRows = ref<RankingItem[]>([])
+  // const rankingRows = ref<RankingItem[]>([])
+  const { rankingRows } = storeToRefs(homeStore)
   const defaultColorList = [
     '#F97875', // 纯红
     '#FF7F00', // 橙色
@@ -33,7 +34,7 @@
     'https://api.dicebear.com/7.x/adventurer/svg?seed=4',
   ]
 
-  rankingRows.value = []
+  // rankingRows.value = []
 
   initRankingRows()
   // test
@@ -41,12 +42,14 @@
   rankingRows.value[0].items.push({ path: defaultImgList[1] }) */
 
   function initRankingRows() {
-    for (let i = 0; i < 4; i++) {
-      rankingRows.value.push({
-        levelName: defaultLevelList[i],
-        items: [],
-        bgColor: defaultColorList[i],
-      })
+    if (rankingRows.value.length === 0) {
+      for (let i = 0; i < 4; i++) {
+        rankingRows.value.push({
+          levelName: defaultLevelList[i],
+          items: [],
+          bgColor: defaultColorList[i],
+        })
+      }
     }
   }
 

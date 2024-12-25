@@ -7,18 +7,22 @@
   import { useOneClickImport } from '@/views/home/hooks/useOneClickImport'
   import { usePin } from '@/views/home/hooks/usePin'
   import { defineEmits } from 'vue'
+  import { useHomeStore } from '@/store/home'
 
   /** ********************图片list模块***********************/
-  const images = ref<ImgItem[]>([
-    /*    {
+  const homeStore = useHomeStore()
+  const { images } = storeToRefs(homeStore)
+
+  /* const images = ref<ImgItem[]>([
+    /!*    {
       path: 'https://api.dicebear.com/7.x/adventurer/svg?seed=10',
       name: '',
     },
     {
       path: 'https://api.dicebear.com/7.x/adventurer/svg?seed=11',
       name: '',
-    }, */
-  ])
+    }, *!/
+  ]) */
 
   const handleImportImg = () => {}
 

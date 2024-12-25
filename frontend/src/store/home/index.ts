@@ -1,10 +1,13 @@
 import { defineStore } from 'pinia'
+import type { ImgItem, RankingItem } from '@/views/home/types'
 const useHomeStore = defineStore({
   id: 'homeInfo',
   state: () =>
     ({
       modeType: 'edit',
-    }) as { modeType: 'edit' | 'preview' },
+      rankingRows: [],
+      images: [],
+    }) as { modeType: 'edit' | 'preview'; rankingRows: RankingItem[]; images: ImgItem[] },
   actions: {
     switchModeType() {
       this.modeType = this.modeType === 'edit' ? 'preview' : 'edit'
