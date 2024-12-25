@@ -1,14 +1,14 @@
 import { useElementSize } from '@vueuse/core'
-import type { MaybeElementRef } from '@vueuse/core'
 
 const usePin = (
   emits: {
     (e: 'handleImageBoxHeightChange', height: number, isPin: boolean): void
   },
-  chooseImagesRef: MaybeElementRef,
+  chooseImagesRef: Ref<HTMLElement | null>,
 ) => {
-  const isPin = ref(false)
-  const { height } = useElementSize(chooseImagesRef)
+  const isPin = ref(true)
+  const { height } = useElementSize(() => unref(chooseImagesRef))
+
   watch([height, isPin], () => {
     emits('handleImageBoxHeightChange', height.value, isPin.value)
   })

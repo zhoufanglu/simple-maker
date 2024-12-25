@@ -91,5 +91,8 @@
       padding: 10px;
       overflow-y: auto;
     }
+    .pin-box {
+      // border: solid 1px red;
+    }
   }
 </style>
