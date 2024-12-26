@@ -49,3 +49,4 @@ Thanks to [everyone](https://github.com/zhoufanglu/simple-maker/graphs/contribut
 
 # 素材地址(Reference material)
 - [app-icons](https://appicons.co/?ref=pushkeen)
+- [League_Of_Legends_Assets](https://github.com/TheePepS/League_Of_Legends_Assets)

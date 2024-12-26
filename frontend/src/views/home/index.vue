@@ -33,10 +33,47 @@
       const dataUrl = await domtoimage.toPng(element, {
         style: { background: 'transparent' }, // 保持透明背景
       })
+      // 创建一个图片对象，加载生成的图片数据
+      const img = new Image()
+      img.src = dataUrl
+      await new Promise((resolve) => (img.onload = resolve))
+
+      // 创建一个临时 canvas
+      const canvas = document.createElement('canvas')
+      const context = canvas.getContext('2d')
+
+      // 设置 canvas 的尺寸与图片一致
+      canvas.width = img.width
+      canvas.height = img.height
+
+      // 将原始图片绘制到 canvas 上
+      context.drawImage(img, 0, 0)
+
+      // 设置水印样式
+      const watermarkText = 'simple-maker.fun'
+      const fontSize = 20 // 字体大小
+      const padding = 12 // 水印距离图片边界的间距
+      context.font = `${fontSize}px ALIMAMAFONT`
+      context.fillStyle = 'rgba(0,0,0,0.3)'
+      context.textAlign = 'right'
+      context.textBaseline = 'bottom'
+
+      // 绘制水印到右下角
+      context.fillText(
+        watermarkText,
+        canvas.width - padding, // 右边距
+        canvas.height - padding, // 下边距
+      )
+
+      // 导出最终的带水印图片
+      const finalDataUrl = canvas.toDataURL('image/png')
+
+      // 创建下载链接
       const link = document.createElement('a')
-      link.href = dataUrl
+      link.href = finalDataUrl
       link.download = `${titleRef.value.title}.png` // 下载文件名
       link.click()
+
       message.success('导出成功')
     } catch (error) {
       message.error(`导出失败：${error}`)
