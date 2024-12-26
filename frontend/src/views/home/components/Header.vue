@@ -24,16 +24,16 @@
   }
   const handelSwitchModel = () => {
     homeStore.switchModeType()
-    message.success(`切换为${homeStore.modeType == 'edit' ? '【编辑】' : '【预览】'}模式`)
-    rightOperateButtons.value[0].icon = homeStore.modeType === 'edit' ? '&#xe655;' : '&#xec86;'
-    rightOperateButtons.value[0].tip = `切换为${homeStore.modeType === 'edit' ? '预览' : '编辑'}模式`
+    message.success(`切换为${homeStore.modeType !== 'edit' ? '【编辑】' : '【预览】'}模式`)
+    rightOperateButtons.value[0].icon = homeStore.modeType !== 'edit' ? '&#xe655;' : '&#xec86;'
+    rightOperateButtons.value[0].tip = `切换为${homeStore.modeType !== 'edit' ? '预览' : '编辑'}模式`
   }
 
   const modalVisible = ref(false)
 
   const rightOperateButtons = ref([
     {
-      icon: homeStore.modeType === 'edit' ? '&#xe655;' : '&#xec86;',
+      icon: homeStore.modeType !== 'edit' ? '&#xe655;' : '&#xec86;',
       tip: `切换为${homeStore.modeType === 'edit' ? '预览' : '编辑'}模式`,
       click: () => {
         handelSwitchModel()

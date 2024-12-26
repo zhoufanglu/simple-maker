@@ -127,7 +127,11 @@
             itemKey="path"
           >
             <template #item="{ element: img }">
-              <n-image :src="img.path" preview-disabled width="80" class="img-item"> </n-image>
+              <n-image :src="img.path" preview-disabled width="80" class="img-item">
+                <template #error>
+                  <i class="iconfont" style="font-size: 80px">&#xe65b;</i>
+                </template>
+              </n-image>
             </template>
           </draggable>
           <!--?action-->

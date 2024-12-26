@@ -3,7 +3,7 @@
   import Draggable from 'vuedraggable'
   import { ImgItem } from '@/views/home/types'
   import type { UploadFileInfo } from 'naive-ui'
-  import { debounce } from '@/tools'
+  import { debounce, fileToBase64 } from '@/tools'
   import { useOneClickImport } from '@/views/home/hooks/useOneClickImport'
   import { usePin } from '@/views/home/hooks/usePin'
   import { defineEmits } from 'vue'
@@ -24,26 +24,30 @@
     }, *!/
   ]) */
 
-  const handleImportImg = () => {}
-
   const handleDelImg = (index: number) => {
     images.value.splice(index, 1)
   }
+
   const addImages = (imgs: ImgItem[]) => {
     images.value = [...images.value, ...imgs]
   }
-  const handleUploadChange = (options: {
+
+  const handleUploadChange = async (options: {
     file: UploadFileInfo
     fileList: Array<UploadFileInfo>
     event?: Event
   }) => {
-    const images: ImgItem[] = options.fileList.map((file) => {
-      return {
-        path: URL.createObjectURL(file!.file),
-        name: '',
-      }
-    })
+    const images: ImgItem[] = await Promise.all(
+      options.fileList.map(async (file) => {
+        const base64String = await fileToBase64(file.file)
+        return {
+          path: base64String,
+          name: '',
+        }
+      }),
+    )
     addImages(images)
+    fileUploadRef.value.clear()
   }
 
   const handleDelAll = () => {
@@ -67,6 +71,7 @@
     variables.visible = false
   }
 
+  const fileUploadRef = ref()
   const debouncedHandleUploadChange = debounce(handleUploadChange, 300)
 
   /** ********************pin***********************/
@@ -92,6 +97,9 @@
       <template #item="{ element: img, index }">
         <div class="img-box">
           <n-image :key="img.path" :src="img.path" preview-disabled width="80" class="img-item">
+            <template #error>
+              <i class="iconfont" style="font-size: 80px">&#xe65b;</i>
+            </template>
           </n-image>
           <i class="iconfont img-del-icon" @click="handleDelImg(index)">&#xe616;</i>
         </div>
@@ -100,12 +108,13 @@
     <!--?自定义导入-->
     <Motion class="import-box">
       <n-upload
+        ref="fileUploadRef"
         :show-file-list="false"
         accept="image/png, image/jpeg, image/gif"
         :on-change="debouncedHandleUploadChange"
         multiple
       >
-        <div class="import-btn" @click="handleImportImg">
+        <div class="import-btn">
           <i class="iconfont">&#xe613;</i>
         </div>
       </n-upload>
