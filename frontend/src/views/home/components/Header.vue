@@ -85,7 +85,7 @@
 <template>
   <div class="p-header">
     <div class="left">
-      <!--      <img class="logo" src="/img/simple-logo-all.svg" @click="goGithub()" />-->
+      <img class="logo" src="/img/simple-logo-all.svg" @click="goGithub()" />
     </div>
     <div class="right">
       <Motion>
@@ -144,17 +144,19 @@
     align-items: center;
     .left {
       .logo {
-        position: relative;
-        top: 20px;
-        left: -20px;
-        width: 70px;
-        height: 70px;
         cursor: pointer;
+        //border: solid 1px red;
+        position: relative;
+        top: 40px;
+        left: -10px;
+        width: 100px;
+        height: 100px;
+        z-index: 999;
       }
     }
     .right {
       i {
-        color: #5386ed;
+        color: #425988;
         font-size: 24px;
       }
       .mode-icon {

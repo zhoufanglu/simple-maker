@@ -6,7 +6,7 @@ const usePin = (
   },
   chooseImagesRef: Ref<HTMLElement | null>,
 ) => {
-  const isPin = ref(true)
+  const isPin = ref(false)
   const { height } = useElementSize(() => unref(chooseImagesRef))
 
   watch([height, isPin], () => {
