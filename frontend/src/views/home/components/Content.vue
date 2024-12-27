@@ -75,7 +75,7 @@
     }
   }
 
-  const emits = defineEmits(['handleDelRow', 'handleDelRowImages', 'dbRemoveClick'])
+  const emits = defineEmits(['handleDelRow', 'handleDelRowImages', 'handleItemDbClick'])
 
   const handleDelRow = (index: number) => {
     const curRow: RankingItem = rankingRows.value[index]
@@ -83,9 +83,9 @@
     emits('handleDelRow', curRow)
     rankingRows.value.splice(index, 1)
   }
-  const dbRemoveClick = (img: RankingItem, index: number, imgIndex: number) => {
+  const handleItemDbClick = (img: RankingItem, index: number, imgIndex: number) => {
     rankingRows.value[index].items.splice(imgIndex, 1)
-    emits('dbRemoveClick', img)
+    emits('handleItemDbClick', img)
   }
 
   const handleDelRowImages = (index: number) => {
@@ -142,7 +142,7 @@
                 preview-disabled
                 width="80"
                 class="img-item"
-                @dblclick="dbRemoveClick(img, index, imgIndex)"
+                @dblclick="handleItemDbClick(img, index, imgIndex)"
               >
                 <template #error>
                   <i class="iconfont" style="font-size: 80px">&#xe65b;</i>

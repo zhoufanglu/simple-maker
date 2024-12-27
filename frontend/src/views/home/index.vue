@@ -18,9 +18,8 @@
   const handleDelRowImages = (row: RankingItem) => {
     chooseImagesRef.value.addImages(row.items)
   }
-  const dbDelCard = (img: ImgItem) => {
+  const handleItemDbClick = (img: ImgItem) => {
     chooseImagesRef.value.addImages([{ ...img }])
-    // row.items.splice(index, 1)
   }
 
   // ? 模拟一个下面的占位box
@@ -101,7 +100,7 @@
           <content
             @handle-del-row="handleDelRow"
             @handle-del-row-images="handleDelRowImages"
-            @db-remove-click="dbDelCard"
+            @handle-item-db-click="handleItemDbClick"
           ></content>
           <choose-images
             v-show="homeStore.modeType === 'edit'"
