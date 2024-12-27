@@ -38,6 +38,12 @@
 - [x] refactor: 重构一键导入功能
 - [x] fix: https://github.com/zhoufanglu/simple-maker/issues/3
 
+- [release-1.2]() - doning
+- [x] feat: 浏览器存储数据
+- [x] fix: 等级删除后添加顺序不对问题
+- [x] feat: 导出+水印
+- [x] fix: 解决usePin类型问题
+
 # 💌 感谢(Special Thanks)
 
 Thanks to [everyone](https://github.com/zhoufanglu/simple-maker/graphs/contributors) who has already contributed to `simple-maker`!
