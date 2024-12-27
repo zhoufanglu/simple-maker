@@ -75,13 +75,17 @@
     }
   }
 
-  const emits = defineEmits(['handleDelRow', 'handleDelRowImages'])
+  const emits = defineEmits(['handleDelRow', 'handleDelRowImages', 'dbRemoveClick'])
 
   const handleDelRow = (index: number) => {
     const curRow: RankingItem = rankingRows.value[index]
     deletedLevelList.push(curRow.levelName)
     emits('handleDelRow', curRow)
     rankingRows.value.splice(index, 1)
+  }
+  const dbRemoveClick = (img: RankingItem, index: number, imgIndex: number) => {
+    rankingRows.value[index].items.splice(imgIndex, 1)
+    emits('dbRemoveClick', img)
   }
 
   const handleDelRowImages = (index: number) => {
@@ -132,8 +136,14 @@
             group="img-row"
             itemKey="path"
           >
-            <template #item="{ element: img }">
-              <n-image :src="img.path" preview-disabled width="80" class="img-item">
+            <template #item="{ element: img, index: imgIndex }">
+              <n-image
+                :src="img.path"
+                preview-disabled
+                width="80"
+                class="img-item"
+                @dblclick="dbRemoveClick(img, index, imgIndex)"
+              >
                 <template #error>
                   <i class="iconfont" style="font-size: 80px">&#xe65b;</i>
                 </template>
@@ -188,8 +198,6 @@
         color: white;
         border-radius: 8px;
         margin-right: 8px;
-        .level-name {
-        }
       }
       .img-row {
         background-color: #fafafa;
