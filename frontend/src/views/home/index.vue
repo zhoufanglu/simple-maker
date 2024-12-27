@@ -15,6 +15,9 @@
   const handleDelRow = (row: RankingItem) => {
     chooseImagesRef.value.addImages(row.items)
   }
+  const handleDelRowImages = (row: RankingItem) => {
+    chooseImagesRef.value.addImages(row.items)
+  }
 
   // ? 模拟一个下面的占位box
   const pinImgsBoxHeight = ref(0)
@@ -91,7 +94,10 @@
       <div ref="previewBoxRef" class="preview-box">
         <Title ref="titleRef"></Title>
         <div class="container">
-          <content @handle-del-row="handleDelRow"></content>
+          <content
+            @handle-del-row="handleDelRow"
+            @handle-del-row-images="handleDelRowImages"
+          ></content>
           <choose-images
             v-show="homeStore.modeType === 'edit'"
             ref="chooseImagesRef"

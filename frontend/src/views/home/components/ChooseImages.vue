@@ -29,7 +29,7 @@
   }
 
   const addImages = (imgs: ImgItem[]) => {
-    images.value = [...images.value, ...imgs]
+    images.value = [...imgs, ...images.value]
   }
 
   const handleUploadChange = async (options: {

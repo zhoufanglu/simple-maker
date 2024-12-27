@@ -75,13 +75,19 @@
     }
   }
 
-  const emits = defineEmits(['handleDelRow'])
+  const emits = defineEmits(['handleDelRow', 'handleDelRowImages'])
 
   const handleDelRow = (index: number) => {
     const curRow: RankingItem = rankingRows.value[index]
     deletedLevelList.push(curRow.levelName)
     emits('handleDelRow', curRow)
     rankingRows.value.splice(index, 1)
+  }
+
+  const handleDelRowImages = (index: number) => {
+    const deletedImgs = rankingRows.value[index]
+    emits('handleDelRowImages', deletedImgs)
+    rankingRows.value[index].items = []
   }
 
   const hexToRgba = (hex: string, alpha = 0.2) => {
@@ -138,9 +144,17 @@
           <Motion v-if="homeStore.modeType === 'edit'">
             <li class="action-item drag-handle">
               <i class="iconfont fa fa-align-justify handle">&#xe6c4;</i>
+              <n-tooltip trigger="hover">
+                <template #trigger>
+                  <i class="iconfont fa fa-align-justify handle" @click="handleDelRowImages(index)"
+                    >&#xe65b;</i
+                  >
+                </template>
+                移除当前的图片
+              </n-tooltip>
               <i class="iconfont fa fa-align-justify handle" @click="handleDelRow(index)"
-                >&#xe616;</i
-              >
+                >&#xe616;
+              </i>
             </li>
           </Motion>
         </ul>
@@ -216,6 +230,10 @@
           &:hover {
             color: #5386ed;
           }
+        }
+        i:nth-child(2) {
+          font-size: 24px;
+          margin-top: 6px;
         }
         i:last-child {
           font-size: 24px;

@@ -89,7 +89,12 @@
 </script>
 <template>
   <div class="p-header">
-    <div class="left">
+    <div
+      :style="{
+        visibility: homeStore.modeType === 'edit' ? 'visible' : 'hidden',
+      }"
+      class="left"
+    >
       <img class="logo" src="/img/simple-logo-all.svg" @click="goGithub()" />
     </div>
     <div class="right">
