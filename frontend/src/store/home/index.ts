@@ -7,7 +7,13 @@ const useHomeStore = defineStore({
       modeType: 'edit',
       rankingRows: [],
       images: [],
-    }) as { modeType: 'edit' | 'preview'; rankingRows: RankingItem[]; images: ImgItem[] },
+      title: '创建你的排名列表 🖊️',
+    }) as {
+      modeType: 'edit' | 'preview'
+      rankingRows: RankingItem[]
+      images: ImgItem[]
+      title: string
+    },
   actions: {
     switchModeType() {
       this.modeType = this.modeType === 'edit' ? 'preview' : 'edit'
