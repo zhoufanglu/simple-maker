@@ -3,7 +3,7 @@
   import ChooseImages from '@/views/home/components/ChooseImages.vue'
   import Content from '@/views/home/components/Content.vue'
   import Header from '@/views/home/components/Header.vue'
-  import { RankingItem } from '@/views/home/types'
+  import { RankingItem, ImgItem } from '@/views/home/types'
   import { useHomeStore } from '@/store/home'
   // @ts-ignore
   import domtoimage from 'dom-to-image'
@@ -17,6 +17,10 @@
   }
   const handleDelRowImages = (row: RankingItem) => {
     chooseImagesRef.value.addImages(row.items)
+  }
+  const dbDelCard = (img: ImgItem) => {
+    chooseImagesRef.value.addImages([{ ...img }])
+    // row.items.splice(index, 1)
   }
 
   // ? 模拟一个下面的占位box
@@ -97,6 +101,7 @@
           <content
             @handle-del-row="handleDelRow"
             @handle-del-row-images="handleDelRowImages"
+            @db-remove-click="dbDelCard"
           ></content>
           <choose-images
             v-show="homeStore.modeType === 'edit'"
@@ -133,9 +138,6 @@
       background-color: #f5f5f5;
       padding: 10px;
       overflow-y: auto;
-    }
-    .pin-box {
-      // border: solid 1px red;
     }
   }
 </style>
