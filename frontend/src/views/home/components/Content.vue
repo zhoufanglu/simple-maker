@@ -10,7 +10,8 @@
   const message = useMessage()
   const homeStore = useHomeStore()
 
-  const rankingRows = ref<RankingItem[]>([])
+  // const rankingRows = ref<RankingItem[]>([])
+  const { rankingRows } = storeToRefs(homeStore)
   const defaultColorList = [
     '#F97875', // 纯红
     '#FF7F00', // 橙色
@@ -24,6 +25,8 @@
     '#9dc3b3', // 薄荷绿
   ]
   const defaultLevelList = ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+  const deletedLevelList = []
+  // 模拟图片数据
   const defaultImgList = [
     'https://api.dicebear.com/7.x/adventurer/svg?seed=1',
     'https://api.dicebear.com/7.x/adventurer/svg?seed=2',
@@ -31,7 +34,7 @@
     'https://api.dicebear.com/7.x/adventurer/svg?seed=4',
   ]
 
-  rankingRows.value = []
+  // rankingRows.value = []
 
   initRankingRows()
   // test
@@ -39,12 +42,14 @@
   rankingRows.value[0].items.push({ path: defaultImgList[1] }) */
 
   function initRankingRows() {
-    for (let i = 0; i < 4; i++) {
-      rankingRows.value.push({
-        levelName: defaultLevelList[i],
-        items: [],
-        bgColor: defaultColorList[i],
-      })
+    if (rankingRows.value.length === 0) {
+      for (let i = 0; i < 4; i++) {
+        rankingRows.value.push({
+          levelName: defaultLevelList[i],
+          items: [],
+          bgColor: defaultColorList[i],
+        })
+      }
     }
   }
 
@@ -54,19 +59,39 @@
       message.info('最多10个！')
       return
     }
-    rankingRows.value.push({
-      levelName: defaultLevelList[len],
-      items: [],
-      bgColor: defaultColorList[len],
-    })
+    if (deletedLevelList.length !== 0) {
+      const colorIndex = defaultLevelList.findIndex((item) => item === deletedLevelList[0])
+      rankingRows.value.push({
+        levelName: deletedLevelList.shift(),
+        items: [],
+        bgColor: defaultColorList[colorIndex],
+      })
+    } else {
+      rankingRows.value.push({
+        levelName: defaultLevelList[len],
+        items: [],
+        bgColor: defaultColorList[len],
+      })
+    }
   }
 
-  const emits = defineEmits(['handleDelRow'])
+  const emits = defineEmits(['handleDelRow', 'handleDelRowImages', 'handleItemDbClick'])
 
   const handleDelRow = (index: number) => {
-    console.log(rankingRows.value[index])
-    emits('handleDelRow', rankingRows.value[index])
+    const curRow: RankingItem = rankingRows.value[index]
+    deletedLevelList.push(curRow.levelName)
+    emits('handleDelRow', curRow)
     rankingRows.value.splice(index, 1)
+  }
+  const handleItemDbClick = (img: RankingItem, index: number, imgIndex: number) => {
+    rankingRows.value[index].items.splice(imgIndex, 1)
+    emits('handleItemDbClick', img)
+  }
+
+  const handleDelRowImages = (index: number) => {
+    const deletedImgs = rankingRows.value[index]
+    emits('handleDelRowImages', deletedImgs)
+    rankingRows.value[index].items = []
   }
 
   const hexToRgba = (hex: string, alpha = 0.2) => {
@@ -111,17 +136,35 @@
             group="img-row"
             itemKey="path"
           >
-            <template #item="{ element: img }">
-              <n-image :src="img.path" preview-disabled width="80" class="img-item"> </n-image>
+            <template #item="{ element: img, index: imgIndex }">
+              <n-image
+                :src="img.path"
+                preview-disabled
+                width="80"
+                class="img-item"
+                @dblclick="handleItemDbClick(img, index, imgIndex)"
+              >
+                <template #error>
+                  <i class="iconfont" style="font-size: 80px">&#xe65b;</i>
+                </template>
+              </n-image>
             </template>
           </draggable>
           <!--?action-->
           <Motion v-if="homeStore.modeType === 'edit'">
             <li class="action-item drag-handle">
               <i class="iconfont fa fa-align-justify handle">&#xe6c4;</i>
+              <n-tooltip trigger="hover">
+                <template #trigger>
+                  <i class="iconfont fa fa-align-justify handle" @click="handleDelRowImages(index)"
+                    >&#xe65b;</i
+                  >
+                </template>
+                移除当前的图片
+              </n-tooltip>
               <i class="iconfont fa fa-align-justify handle" @click="handleDelRow(index)"
-                >&#xe616;</i
-              >
+                >&#xe616;
+              </i>
             </li>
           </Motion>
         </ul>
@@ -155,8 +198,6 @@
         color: white;
         border-radius: 8px;
         margin-right: 8px;
-        .level-name {
-        }
       }
       .img-row {
         background-color: #fafafa;
@@ -197,6 +238,10 @@
           &:hover {
             color: #5386ed;
           }
+        }
+        i:nth-child(2) {
+          font-size: 24px;
+          margin-top: 6px;
         }
         i:last-child {
           font-size: 24px;

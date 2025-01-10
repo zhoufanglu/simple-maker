@@ -24,8 +24,8 @@
   }
   const handelSwitchModel = () => {
     homeStore.switchModeType()
-    message.success(`切换为${homeStore.modeType == 'edit' ? '【编辑】' : '【预览】'}模式`)
-    rightOperateButtons.value[0].icon = homeStore.modeType === 'edit' ? '&#xe655;' : '&#xec86;'
+    message.success(`已切换为${homeStore.modeType === 'edit' ? '【编辑】' : '【预览】'}模式`)
+    rightOperateButtons.value[0].icon = homeStore.modeType !== 'edit' ? '&#xe655;' : '&#xec86;'
     rightOperateButtons.value[0].tip = `切换为${homeStore.modeType === 'edit' ? '预览' : '编辑'}模式`
   }
 
@@ -33,7 +33,7 @@
 
   const rightOperateButtons = ref([
     {
-      icon: homeStore.modeType === 'edit' ? '&#xe655;' : '&#xec86;',
+      icon: homeStore.modeType !== 'edit' ? '&#xe655;' : '&#xec86;',
       tip: `切换为${homeStore.modeType === 'edit' ? '预览' : '编辑'}模式`,
       click: () => {
         handelSwitchModel()
@@ -69,7 +69,17 @@
   ])
 
   // 打赏列表
-  const rewards = [
+  const wxRewards = [
+    {
+      name: 'n*ll',
+      money: '0.20',
+      time: '2024-12-27',
+    },
+    {
+      name: '[福]*[發]',
+      money: '0.10',
+      time: '2024-12-26',
+    },
     {
       name: '*川',
       money: '0.10',
@@ -84,8 +94,13 @@
 </script>
 <template>
   <div class="p-header">
-    <div class="left">
-      <!--      <img class="logo" src="/img/simple-logo-all.svg" @click="goGithub()" />-->
+    <div
+      :style="{
+        visibility: homeStore.modeType === 'edit' ? 'visible' : 'hidden',
+      }"
+      class="left"
+    >
+      <img class="logo" src="/img/simple-logo-all.svg" @click="goGithub()" />
     </div>
     <div class="right">
       <Motion>
@@ -119,7 +134,7 @@
           <n-tab-pane name="打赏记录" tab="打赏记录">
             <n-timeline>
               <n-timeline-item
-                v-for="(i, index) in rewards"
+                v-for="(i, index) in wxRewards"
                 :key="index"
                 type="info"
                 :title="i.name"
@@ -144,17 +159,19 @@
     align-items: center;
     .left {
       .logo {
-        position: relative;
-        top: 20px;
-        left: -20px;
-        width: 70px;
-        height: 70px;
         cursor: pointer;
+        //border: solid 1px red;
+        position: relative;
+        top: 40px;
+        left: -10px;
+        width: 100px;
+        height: 100px;
+        z-index: 999;
       }
     }
     .right {
       i {
-        color: #5386ed;
+        color: #425988;
         font-size: 24px;
       }
       .mode-icon {

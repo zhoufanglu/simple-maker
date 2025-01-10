@@ -89,6 +89,7 @@
     "message": true,
     "appendParamsToUrl": true,
     "debounce": true,
-    "useHomeStore": true
+    "useHomeStore": true,
+    "fileToBase64": true
   }
 }

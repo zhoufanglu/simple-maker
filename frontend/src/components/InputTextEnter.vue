@@ -15,6 +15,21 @@
       titleRef.value.focus()
     })
   }
+
+  const getFontSize = (text: string | number) => {
+    const len = String(text).length
+    let fontSize = 0
+    if (len >= 0 && len < 4) {
+      fontSize = 36
+    } else if (len >= 4 && len <= 8) {
+      fontSize = 30
+    } else if (len > 8 && len <= 14) {
+      fontSize = 20
+    } else if (len >= 15) {
+      fontSize = 14
+    }
+    return fontSize
+  }
 </script>
 <template>
   <div class="p-text">
@@ -36,26 +51,18 @@
         }
       "
     />
-    <!--    <span
+    <span
       v-if="from === 'Title'"
       v-show="inputState === 'text'"
-      style="font-size: 50px; color: #5386ed"
-      @click="handleTextClick"
-    >
-      {{ text }}</span
-    >-->
-    <n-gradient-text
-      v-if="from === 'Title'"
-      v-show="inputState === 'text'"
-      font-size="50"
-      type="info"
+      class="title-span"
       @click="handleTextClick"
     >
       {{ text }}
-    </n-gradient-text>
+    </span>
     <span
       v-show="inputState === 'text' && from === 'LevelItem'"
       class="text-span"
+      :style="{ fontSize: getFontSize(text) + 'px' }"
       @click="handleTextClick"
     >
       {{ text }}
@@ -75,22 +82,23 @@
       min-height: 60px;
     }
     .text-span {
-      display: block;
-      flex-wrap: wrap;
-      min-width: 60px;
-      // line-height: 44px;
-      min-height: 60px;
-      max-height: 100px;
-      max-width: 100px;
-      // border: solid 1px red;
+      display: flex;
+      flex-wrap: wrap; /* 允许换行 */
+      align-items: center; /* 垂直居中 */
+      justify-content: center; /* 水平居中 */
+      height: 100px; /* 容器高度 */
+      width: 100px; /* 容器宽度 */
+      text-align: center; /* 文字水平居中 */
+      word-wrap: break-word; /* 强制文本换行 */
+      overflow-wrap: break-word; /* 防止长单词不换行 */
+      word-break: break-all;
+      white-space: wrap;
       text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
       font-size: 40px;
-      // font-size: calc(40px - 0.5px * var(--text-length));
-      word-wrap: break-word;
-      white-space: normal;
-      text-align: center; /* 居中文字 */
-      overflow-wrap: break-word; /* 强制长单词换行 */
-      line-break: auto; /* 处理中文换行 */
+    }
+    .title-span {
+      font-size: 50px;
+      color: #5c3f95;
       font-family: ALIMAMAFONT;
     }
   }

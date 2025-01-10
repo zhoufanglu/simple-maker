@@ -3,7 +3,7 @@
   import ChooseImages from '@/views/home/components/ChooseImages.vue'
   import Content from '@/views/home/components/Content.vue'
   import Header from '@/views/home/components/Header.vue'
-  import { RankingItem } from '@/views/home/types'
+  import { RankingItem, ImgItem } from '@/views/home/types'
   import { useHomeStore } from '@/store/home'
   // @ts-ignore
   import domtoimage from 'dom-to-image'
@@ -14,6 +14,12 @@
 
   const handleDelRow = (row: RankingItem) => {
     chooseImagesRef.value.addImages(row.items)
+  }
+  const handleDelRowImages = (row: RankingItem) => {
+    chooseImagesRef.value.addImages(row.items)
+  }
+  const handleItemDbClick = (img: ImgItem) => {
+    chooseImagesRef.value.addImages([{ ...img }])
   }
 
   // ? 模拟一个下面的占位box
@@ -33,10 +39,47 @@
       const dataUrl = await domtoimage.toPng(element, {
         style: { background: 'transparent' }, // 保持透明背景
       })
+      // 创建一个图片对象，加载生成的图片数据
+      const img = new Image()
+      img.src = dataUrl
+      await new Promise((resolve) => (img.onload = resolve))
+
+      // 创建一个临时 canvas
+      const canvas = document.createElement('canvas')
+      const context = canvas.getContext('2d')
+
+      // 设置 canvas 的尺寸与图片一致
+      canvas.width = img.width
+      canvas.height = img.height
+
+      // 将原始图片绘制到 canvas 上
+      context.drawImage(img, 0, 0)
+
+      // 设置水印样式
+      const watermarkText = 'simple-maker.fun'
+      const fontSize = 20 // 字体大小
+      const padding = 12 // 水印距离图片边界的间距
+      context.font = `${fontSize}px ALIMAMAFONT`
+      context.fillStyle = 'rgba(0,0,0,0.3)'
+      context.textAlign = 'right'
+      context.textBaseline = 'bottom'
+
+      // 绘制水印到右下角
+      context.fillText(
+        watermarkText,
+        canvas.width - padding, // 右边距
+        canvas.height - padding, // 下边距
+      )
+
+      // 导出最终的带水印图片
+      const finalDataUrl = canvas.toDataURL('image/png')
+
+      // 创建下载链接
       const link = document.createElement('a')
-      link.href = dataUrl
+      link.href = finalDataUrl
       link.download = `${titleRef.value.title}.png` // 下载文件名
       link.click()
+
       message.success('导出成功')
     } catch (error) {
       message.error(`导出失败：${error}`)
@@ -54,7 +97,11 @@
       <div ref="previewBoxRef" class="preview-box">
         <Title ref="titleRef"></Title>
         <div class="container">
-          <content @handle-del-row="handleDelRow"></content>
+          <content
+            @handle-del-row="handleDelRow"
+            @handle-del-row-images="handleDelRowImages"
+            @handle-item-db-click="handleItemDbClick"
+          ></content>
           <choose-images
             v-show="homeStore.modeType === 'edit'"
             ref="chooseImagesRef"
@@ -90,9 +137,6 @@
       background-color: #f5f5f5;
       padding: 10px;
       overflow-y: auto;
-    }
-    .pin-box {
-      // border: solid 1px red;
     }
   }
 </style>

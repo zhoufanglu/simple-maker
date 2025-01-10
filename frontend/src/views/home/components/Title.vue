@@ -2,7 +2,8 @@
   import Motion from '@/components/motion'
   import InputTextEnter from '@/components/InputTextEnter.vue'
 
-  const title = ref('创建你的等级列表 🖊️')
+  const homeStore = useHomeStore()
+  const { title } = storeToRefs(homeStore)
 
   defineExpose({ title })
 </script>
@@ -20,5 +21,7 @@
     box-sizing: border-box;
     padding: 10px;
     height: 90px;
+    width: 80%;
+    margin: 0 auto;
   }
 </style>

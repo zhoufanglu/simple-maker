@@ -35,3 +35,22 @@ export function debounce<T extends (...args: any[]) => void>(
     }, wait)
   }
 }
+
+export const fileToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+
+    // 监听文件读取完成事件
+    reader.onload = () => {
+      resolve(reader.result as string) // 结果是 Base64 字符串
+    }
+
+    // 监听文件读取错误事件
+    reader.onerror = (error) => {
+      reject(error)
+    }
+
+    // 开始读取文件
+    reader.readAsDataURL(file)
+  })
+}

@@ -20,6 +20,7 @@ declare global {
   const defineComponent: typeof import('vue')['defineComponent']
   const defineStore: typeof import('pinia')['defineStore']
   const effectScope: typeof import('vue')['effectScope']
+  const fileToBase64: typeof import('./tools/index')['fileToBase64']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
@@ -110,6 +111,7 @@ declare module 'vue' {
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly fileToBase64: UnwrapRef<typeof import('./tools/index')['fileToBase64']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
