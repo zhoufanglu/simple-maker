@@ -109,6 +109,7 @@
     <Motion class="import-box">
       <n-upload
         ref="fileUploadRef"
+        directory-dnd
         :show-file-list="false"
         accept="image/png, image/jpeg, image/gif"
         :on-change="debouncedHandleUploadChange"
