@@ -36,23 +36,14 @@
         }
       "
     />
-    <!--    <span
+    <span
       v-if="from === 'Title'"
       v-show="inputState === 'text'"
-      style="font-size: 50px; color: #5386ed"
-      @click="handleTextClick"
-    >
-      {{ text }}</span
-    >-->
-    <n-gradient-text
-      v-if="from === 'Title'"
-      v-show="inputState === 'text'"
-      font-size="50"
-      type="info"
+      class="title-span"
       @click="handleTextClick"
     >
       {{ text }}
-    </n-gradient-text>
+    </span>
     <span
       v-show="inputState === 'text' && from === 'LevelItem'"
       class="text-span"
@@ -91,6 +82,10 @@
       text-align: center; /* 居中文字 */
       overflow-wrap: break-word; /* 强制长单词换行 */
       line-break: auto; /* 处理中文换行 */
+    }
+    .title-span {
+      font-size: 50px;
+      color: #5c3f95;
       font-family: ALIMAMAFONT;
     }
   }
