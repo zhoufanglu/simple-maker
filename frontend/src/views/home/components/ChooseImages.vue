@@ -307,6 +307,7 @@
       gap: 8px;
       margin-top: 8px;
       border-radius: 8px;
+      flex-wrap: wrap;
       .n-tag {
         cursor: pointer;
       }

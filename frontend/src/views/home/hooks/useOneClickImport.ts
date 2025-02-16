@@ -22,6 +22,11 @@ const useOneClickImport = () => {
       name: '黑神话-悟空',
       imgs: getImgPathList('wukong'),
     },
+    {
+      logo: getImageUrl('PVZ-RH'),
+      name: '植物大战僵尸融合版-PVZ-RH',
+      imgs: getImgPathList('PVZ-RH'),
+    },
   ]
 
   function getImgPathList(folderName: FolderName) {
@@ -36,6 +41,9 @@ const useOneClickImport = () => {
         break
       case 'wukong':
         imageFiles = import.meta.glob('@/assets/imgs/wukong/*.png', { eager: true })
+        break
+      case 'PVZ-RH':
+        imageFiles = import.meta.glob('@/assets/imgs/PVZ-RH/*.png', { eager: true })
         break
     }
     return Object.values(imageFiles).map((module) => module.default)
