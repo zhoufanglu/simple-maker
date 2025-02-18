@@ -142,6 +142,7 @@
                 preview-disabled
                 width="80"
                 class="img-item"
+                object-fit="scale-down"
                 @dblclick="handleItemDbClick(img, index, imgIndex)"
               >
                 <template #error>

@@ -96,7 +96,14 @@
     >
       <template #item="{ element: img, index }">
         <div class="img-box">
-          <n-image :key="img.path" :src="img.path" preview-disabled width="80" class="img-item">
+          <n-image
+            :key="img.path"
+            :src="img.path"
+            preview-disabled
+            width="80"
+            class="img-item"
+            object-fit="scale-down"
+          >
             <template #error>
               <i class="iconfont" style="font-size: 80px">&#xe65b;</i>
             </template>
