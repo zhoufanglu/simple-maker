@@ -37,7 +37,7 @@
     downloadLoading.value = true
     try {
       const dataUrl = await domtoimage.toPng(element, {
-        style: { background: 'transparent' }, // 保持透明背景
+        style: { background: '#FFFFFF' }, // 保持透明背景
       })
       // 创建一个图片对象，加载生成的图片数据
       const img = new Image()
