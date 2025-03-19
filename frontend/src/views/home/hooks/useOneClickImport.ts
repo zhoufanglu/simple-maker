@@ -24,7 +24,7 @@ const useOneClickImport = () => {
     },
     {
       logo: getImageUrl('PVZ-RH'),
-      name: '植物大战僵尸融合版-PVZ-RH',
+      name: '融合版究级植物-PVZ-RH',
       imgs: getImgPathList('PVZ-RH'),
     },
   ]
