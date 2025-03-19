@@ -90,6 +90,7 @@
     "appendParamsToUrl": true,
     "debounce": true,
     "useHomeStore": true,
-    "fileToBase64": true
+    "fileToBase64": true,
+    "eventBus": true
   }
 }

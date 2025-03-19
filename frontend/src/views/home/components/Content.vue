@@ -1,11 +1,12 @@
 <script setup lang="ts">
   import Draggable from 'vuedraggable'
-  import { RankingItem } from '../types'
+  import { ImgItem, RankingItem } from '../types'
   import Motion from '@/components/motion'
   import { useMessage } from 'naive-ui'
   import { useHomeStore } from '@/store/home'
   import InputTextEnter from '@/components/InputTextEnter.vue'
   import { defineEmits } from 'vue'
+  import { eventBus } from '@/tools/eventBus'
 
   const message = useMessage()
   const homeStore = useHomeStore()
@@ -101,6 +102,16 @@
     const b = parseInt(hex.substring(4, 6), 16)
     return `rgba(${r}, ${g}, ${b}, ${alpha})`
   }
+
+  onMounted(() => {
+    eventBus.on('handleDbClickBottomImg', (img: ImgItem) => {
+      rankingRows.value[0].items.push({ path: img.path })
+    })
+  })
+
+  onUnmounted(() => {
+    eventBus.off('handleDbClickBottomImg')
+  })
 </script>
 <template>
   <div v-auto-animate class="content">

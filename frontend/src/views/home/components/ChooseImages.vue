@@ -8,6 +8,7 @@
   import { usePin } from '@/views/home/hooks/usePin'
   import { defineEmits } from 'vue'
   import { useHomeStore } from '@/store/home'
+  import { eventBus } from '@/tools/eventBus'
 
   /** ********************图片list模块***********************/
   const homeStore = useHomeStore()
@@ -30,6 +31,11 @@
 
   const addImages = (imgs: ImgItem[]) => {
     images.value = [...imgs, ...images.value]
+  }
+
+  const handleDbClick = (img: ImgItem, index: number) => {
+    images.value.splice(index, 1)
+    eventBus.emit('handleDbClickBottomImg', img)
   }
 
   const handleUploadChange = async (options: {
@@ -103,6 +109,7 @@
             width="80"
             class="img-item"
             object-fit="scale-down"
+            @dblclick="handleDbClick(img, index)"
           >
             <template #error>
               <i class="iconfont" style="font-size: 80px">&#xe65b;</i>
