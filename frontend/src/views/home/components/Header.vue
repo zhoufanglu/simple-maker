@@ -71,6 +71,11 @@
   // 打赏列表
   const wxRewards = [
     {
+      name: '树*H',
+      money: '¥5',
+      time: '2025-3-30',
+    },
+    {
       name: '*邓(植物大战僵尸up主)',
       money: '¥5',
       time: '2025-3-14',
