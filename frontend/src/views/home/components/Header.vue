@@ -3,11 +3,12 @@
   import Motion from '@/components/motion'
   import { useMessage } from 'naive-ui'
   import { defineEmits } from 'vue'
+  import { wxRewards } from '@/views/home/rewards'
 
   const emits = defineEmits(['handleDownLoad'])
 
   const message = useMessage()
-  const wxQR = new URL('@/assets/imgs/pay/wxQR.JPG', import.meta.url)
+  const wxQR = new URL('@/assets/imgs/pay/wxQR.JPG', import.meta.url).href
   const homeStore = useHomeStore()
 
   const goGithub = () => {
@@ -68,39 +69,10 @@
     },
   ])
 
-  // 打赏列表
-  const wxRewards = [
-    {
-      name: '树*H',
-      money: '¥5',
-      time: '2025-3-30',
-    },
-    {
-      name: '*邓(植物大战僵尸up主)',
-      money: '¥5',
-      time: '2025-3-14',
-    },
-    {
-      name: 'n*ll',
-      money: '0.20',
-      time: '2024-12-27',
-    },
-    {
-      name: '[福]*[發]',
-      money: '0.10',
-      time: '2024-12-26',
-    },
-    {
-      name: '*川',
-      money: '0.10',
-      time: '2024-12-12',
-    },
-    {
-      name: '拾*忆',
-      money: '9.90',
-      time: '2024-12-11',
-    },
-  ]
+  // 计算总金额
+  const totalMoney = computed(() => {
+    return wxRewards.reduce((sum, item) => sum + parseFloat(item.money), 0)
+  })
 </script>
 <template>
   <div class="p-header">
@@ -142,16 +114,22 @@
             <n-image :height="562 / 2" :width="424 / 2" :src="wxQR" />
           </n-tab-pane>
           <n-tab-pane name="打赏记录" tab="打赏记录">
-            <n-timeline>
-              <n-timeline-item
-                v-for="(i, index) in wxRewards"
-                :key="index"
-                type="info"
-                :title="i.name"
-                :content="`¥ ${i.money}`"
-                :time="i.time"
-              />
-            </n-timeline>
+            <div class="reward-panel">
+              <n-timeline style="height: 400px; overflow-y: scroll">
+                <n-timeline-item
+                  v-for="(i, index) in wxRewards"
+                  :key="index"
+                  type="info"
+                  :title="i.name"
+                  :content="`¥ ${i.money}`"
+                  :time="i.time"
+                />
+              </n-timeline>
+              <div class="total-row">
+                <span>总计:</span>
+                <span>{{ totalMoney.toFixed(2) }}</span>
+              </div>
+            </div>
           </n-tab-pane>
         </n-tabs>
       </div>
@@ -207,6 +185,27 @@
           color: #5386ed;
           font-weight: bolder;
           font-family: ALIMAMAFONT;
+        }
+        .reward-panel {
+          width: 100%;
+          h4 {
+            margin-top: 6px;
+            font-weight: bolder;
+            font-family: ALIMAMAFONT;
+          }
+          .total-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            span:first-child {
+              margin-right: 10px;
+            }
+            span:last-child {
+              color: #5386ed;
+              font-weight: bolder;
+              font-family: ALIMAMAFONT;
+            }
+          }
         }
       }
     }
