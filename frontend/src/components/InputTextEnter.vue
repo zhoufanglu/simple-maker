@@ -57,7 +57,7 @@
       class="title-span"
       @click="handleTextClick"
     >
-      {{ text }}
+      {{ text ? text : ' 🖊️' }}
     </span>
     <span
       v-show="inputState === 'text' && from === 'LevelItem'"
