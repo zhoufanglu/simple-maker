@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      vfonts:
+        specifier: ^0.0.3
+        version: 0.0.3
       vue:
         specifier: ^3.5.8
         version: 3.5.8(typescript@5.5.4)
@@ -2509,6 +2512,9 @@ packages:
     resolution: {integrity: sha512-H9V1zGRLQZg9b+GdMk8MXDN2Lva0zx72MPahDKc30v+DtwKjfyOSXWRIX4t2mhDubM1H09gPhWeth/BJWPHGUw==}
     peerDependencies:
       vue: ^3.0.11
+
+  vfonts@0.0.3:
+    resolution: {integrity: sha512-nguyw8L6Un8eelg1vQ31vIU2ESxqid7EYmy8V+MDeMaHBqaRSkg3dTBToC1PR00D89UzS/SLkfYPnx0Wf23IQQ==}
 
   vite-plugin-vue-setup-extend@0.4.0:
     resolution: {integrity: sha512-WMbjPCui75fboFoUTHhdbXzu4Y/bJMv5N9QT9a7do3wNMNHHqrk+Tn2jrSJU0LS5fGl/EG+FEDBYVUeWIkDqXQ==}
@@ -5313,6 +5319,8 @@ snapshots:
     dependencies:
       evtd: 0.2.4
       vue: 3.5.8(typescript@5.5.4)
+
+  vfonts@0.0.3: {}
 
   vite-plugin-vue-setup-extend@0.4.0(vite@5.4.2(@types/node@22.5.0)(sass@1.77.8)):
     dependencies:

@@ -11,6 +11,7 @@
     "lint": "lint-staged"
   },
   "dependencies": {
+    "vfonts": "^0.0.3",
     "vue": "^3.5.8"
   },
   "devDependencies": {

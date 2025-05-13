@@ -24,10 +24,14 @@ import {
   NTimelineItem,
   NSpin,
   NTooltip,
+  NSwitch,
 } from 'naive-ui'
 
 // 自定义指令
 import directivesTool from '@/directives'
+
+import 'vfonts/Lato.css' // 主体文字
+import 'vfonts/FiraCode.css' // 等宽字体（用于代码等）
 
 const app = createApp(App)
 
@@ -48,6 +52,7 @@ const naive = create({
     NTimelineItem,
     NSpin,
     NTooltip,
+    NSwitch,
   ],
 })
 

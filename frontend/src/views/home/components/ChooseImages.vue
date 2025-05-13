@@ -6,7 +6,7 @@
   import { debounce, fileToBase64 } from '@/tools'
   import { useOneClickImport } from '@/views/home/hooks/useOneClickImport'
   import { usePin } from '@/views/home/hooks/usePin'
-  import { defineEmits } from 'vue'
+
   import { useHomeStore } from '@/store/home'
   import { eventBus } from '@/tools/eventBus'
 
@@ -93,7 +93,7 @@
   <div ref="chooseImagesRef" class="choose-images" :class="isPin ? 'pin-choose-images' : null">
     <Draggable
       v-auto-animate
-      class="img-row"
+      class="img-row dark-row"
       itemKey="path"
       group="img-row"
       ghost-class="ghost"
@@ -225,7 +225,7 @@
           box-shadow: 0 4px 8px rgba(255, 255, 255, 0.15);
           background-color: white;
           border-radius: 2px;
-          transition: all 0.3s ease;
+          transition: all 0.5s ease;
           &:hover {
             color: #5386ed;
           }

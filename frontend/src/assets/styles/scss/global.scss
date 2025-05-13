@@ -7,6 +7,7 @@
   --el-font-weight-primary: 300 !important;
   --color-default: #303133;
 }
+$text_light_color: rgba(255, 255, 255, 0.9);
 @mixin vertical-center {
   // 垂直水平居中
   display: flex;
@@ -148,9 +149,9 @@
 /* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
   font-family: 'iconfont';  /* Project id 4770048 */
-  src: url('//at.alicdn.com/t/c/font_4770048_y6j0l3tbxkm.woff2?t=1735176532750') format('woff2'),
-  url('//at.alicdn.com/t/c/font_4770048_y6j0l3tbxkm.woff?t=1735176532750') format('woff'),
-  url('//at.alicdn.com/t/c/font_4770048_y6j0l3tbxkm.ttf?t=1735176532750') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_4770048_f55esljegrt.woff2?t=1747133194102') format('woff2'),
+  url('//at.alicdn.com/t/c/font_4770048_f55esljegrt.woff?t=1747133194102') format('woff'),
+  url('//at.alicdn.com/t/c/font_4770048_f55esljegrt.ttf?t=1747133194102') format('truetype');
 }
 
 .iconfont {

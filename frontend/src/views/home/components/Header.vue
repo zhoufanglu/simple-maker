@@ -2,7 +2,7 @@
   import { useHomeStore } from '@/store/home'
   import Motion from '@/components/motion'
   import { useMessage } from 'naive-ui'
-  import { defineEmits } from 'vue'
+
   import { wxRewards } from '@/views/home/rewards'
 
   const emits = defineEmits(['handleDownLoad'])
@@ -38,6 +38,16 @@
       tip: `切换为${homeStore.modeType === 'edit' ? '预览' : '编辑'}模式`,
       click: () => {
         handelSwitchModel()
+      },
+    },
+    {
+      icon: homeStore.skin !== 'light' ? '&#xe76b;' : '&#xe617;',
+      tip: `切换为${homeStore.skin === 'dark' ? '深色' : '浅色'}模式`,
+      click: () => {
+        homeStore.switchSkin()
+        // message.success(`已切换为${homeStore.skin === 'dark' ? '深色' : '浅色'}模式`)
+        rightOperateButtons.value[1].icon = homeStore.skin !== 'light' ? '&#xe76b;' : '&#xe617;'
+        rightOperateButtons.value[1].tip = `切换为${homeStore.skin === 'dark' ? '深色' : '浅色'}模式`
       },
     },
     {
@@ -82,7 +92,13 @@
       }"
       class="left"
     >
-      <img class="logo" src="/img/simple-logo-all.svg" @click="goGithub()" />
+      <img
+        class="logo"
+        :src="
+          homeStore.skin !== 'dark' ? '/img/simple-logo-all.svg' : '/img/simple-logo-all-white.svg'
+        "
+        @click="goGithub()"
+      />
     </div>
     <div class="right">
       <Motion>

@@ -5,7 +5,7 @@
   import { useMessage } from 'naive-ui'
   import { useHomeStore } from '@/store/home'
   import InputTextEnter from '@/components/InputTextEnter.vue'
-  import { defineEmits } from 'vue'
+
   import { eventBus } from '@/tools/eventBus'
 
   const message = useMessage()
@@ -95,7 +95,14 @@
     rankingRows.value[index].items = []
   }
 
+  const isDark = computed(() => {
+    return homeStore.skin === 'dark'
+  })
+
   const hexToRgba = (hex: string, alpha = 0.2) => {
+    if (isDark) {
+      alpha = 0.4
+    }
     hex = hex.replace('#', '')
     const r = parseInt(hex.substring(0, 2), 16)
     const g = parseInt(hex.substring(2, 4), 16)
