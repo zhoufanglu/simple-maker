@@ -224,7 +224,7 @@
           right: 2px;
           top: 2px;
           cursor: pointer;
-          // opacity: 0;
+          opacity: 0;
           transform: scale(0.8);
           box-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 0.5);
           background-color: white;
