@@ -11,6 +11,9 @@
 
   const chooseImagesRef = ref<InstanceType<typeof ChooseImages>>()
   const homeStore = useHomeStore()
+  const isDark = computed(() => {
+    return homeStore.skin === 'dark'
+  })
 
   const handleDelRow = (row: RankingItem) => {
     chooseImagesRef.value.addImages(row.items)
@@ -37,7 +40,7 @@
     downloadLoading.value = true
     try {
       const dataUrl = await domtoimage.toPng(element, {
-        style: { background: '#FFFFFF' }, // 保持透明背景
+        style: { background: isDark.value ? '#333333' : '#FFFFFF' }, // 保持透明背景
       })
       // 创建一个图片对象，加载生成的图片数据
       const img = new Image()
