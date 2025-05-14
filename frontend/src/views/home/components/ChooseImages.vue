@@ -211,9 +211,12 @@
       transition: all 0.3s ease;
       .img-box {
         position: relative;
+        transition: all 0.3s ease;
         &:hover {
           .img-del-icon {
-            display: block;
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
           }
         }
         .img-del-icon {
@@ -221,8 +224,9 @@
           right: 2px;
           top: 2px;
           cursor: pointer;
-          display: none;
-          box-shadow: 0 4px 8px rgba(255, 255, 255, 0.15);
+          opacity: 0;
+          transform: scale(0.8);
+          box-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 0.5);
           background-color: white;
           border-radius: 2px;
           transition: all 0.5s ease;
@@ -310,6 +314,22 @@
   }
 </style>
 <style lang="scss">
+  .sortable-ghost {
+    border: 1px dashed grey;
+    font-size: 0;
+    overflow: hidden;
+  }
+  .ghost {
+    .img-del-icon {
+      opacity: 0;
+    }
+  }
+
+  .drag-preview {
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%) rotate(7deg) translateY(55%);
+  }
+
   .one-click-model {
     width: 468px;
     position: fixed;
