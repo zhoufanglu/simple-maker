@@ -3,7 +3,7 @@
 - 高度自定义排序，拖拽排序，自定义等级，自定义图片等。
 
 - A custom ranking tool, such as LOL hero T-level leaderboard。
--  Height custom sort, drag and drop sort, custom level, custom picture, etc.
+-  Height custom sort, drag 和 drop sort, custom level, custom picture, etc.
 # 官网(website)
 - [simple-maker](http://simple-maker.fun)
 
@@ -41,3 +41,6 @@ Thanks to [everyone](https://github.com/zhoufanglu/simple-maker/graphs/contribut
 # 素材地址(Reference material)
 - [app-icons](https://appicons.co/?ref=pushkeen)
 - [League_Of_Legends_Assets](https://github.com/TheePepS/League_Of_Legends_Assets)
+
+# Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=zhoufanglu/simple-maker&type=Date)](https://www.star-history.com/#zhoufanglu/simple-maker&Date)
