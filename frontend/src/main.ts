@@ -25,6 +25,8 @@ import {
   NSpin,
   NTooltip,
   NSwitch,
+  NRadio,
+  NRadioGroup,
 } from 'naive-ui'
 
 // 自定义指令
@@ -53,6 +55,8 @@ const naive = create({
     NSpin,
     NTooltip,
     NSwitch,
+    NRadio,
+    NRadioGroup,
   ],
 })
 

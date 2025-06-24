@@ -20,9 +20,9 @@
     const len = String(text).length
     let fontSize = 0
     if (len >= 0 && len < 4) {
-      fontSize = 32
+      fontSize = 36
     } else if (len >= 4 && len <= 8) {
-      fontSize = 26
+      fontSize = 32
     } else if (len > 8 && len <= 14) {
       fontSize = 20
     } else if (len >= 15) {
@@ -74,6 +74,9 @@
   .p-text {
     text-align: center;
     box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    @include vertical-center;
     .n-input {
       font-size: 24px;
     }
@@ -82,12 +85,13 @@
       min-height: 60px;
     }
     .text-span {
+      // border: solid 1px red;
       display: flex;
       flex-wrap: wrap; /* 允许换行 */
       align-items: center; /* 垂直居中 */
       justify-content: center; /* 水平居中 */
-      height: 100px; /* 容器高度 */
-      width: 100px; /* 容器宽度 */
+      height: 90%; /* 容器高度 */
+      width: 90%; /* 容器宽度 */
       text-align: center; /* 文字水平居中 */
       word-wrap: break-word; /* 强制文本换行 */
       overflow-wrap: break-word; /* 防止长单词不换行 */

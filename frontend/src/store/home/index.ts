@@ -10,12 +10,14 @@ const useHomeStore = defineStore({
       rankingRows: [],
       images: [],
       title: '创建你的排名列表 🖊️',
+      cardSize: 'small',
     }) as {
       modeType: 'edit' | 'preview'
       skin: 'dark' | 'light'
       rankingRows: RankingItem[]
       images: ImgItem[]
       title: string
+      cardSize: 'small' | 'normal' | 'large'
     },
   actions: {
     switchModeType() {

@@ -34,7 +34,7 @@ const useOneClickImport = () => {
     },
     {
       logo: getImageUrl('yin-yu-fei'),
-      name: 'ACE联盟战队队标',
+      name: '银与绯',
       imgs: getImgPathList('yin-yu-fei'),
     },
   ]

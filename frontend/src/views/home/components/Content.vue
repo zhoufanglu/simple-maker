@@ -118,6 +118,29 @@
     return `rgba(${r}, ${g}, ${b}, ${alpha})`
   }
 
+  // ?卡片尺寸处理
+  const cardSize = homeStore.cardSize
+  const getCardStyle = (type: 'level-item' | 'img-item') => {
+    const sizeMap = {
+      small: 100,
+      normal: 120,
+      large: 200,
+    }
+    const cardSize = sizeMap[homeStore.cardSize] || 120
+    if (type === 'level-item') {
+      return {
+        width: `${cardSize}px`,
+        height: `${cardSize}px`,
+      }
+    } else if (type === 'img-item') {
+      return {
+        width: `${cardSize * 0.8}px`,
+        height: `${cardSize * 0.8}px`,
+      }
+    }
+    return {}
+  }
+
   onMounted(() => {
     eventBus.on('handleDbClickBottomImg', (img: ImgItem) => {
       rankingRows.value[0].items.push({ path: img.path })
@@ -142,7 +165,10 @@
       <template #item="{ element: rank, index }">
         <ul class="rank-row">
           <!--?level-item-->
-          <li class="level-item" :style="{ backgroundColor: rank.bgColor }">
+          <li
+            class="level-item"
+            :style="{ backgroundColor: rank.bgColor, ...getCardStyle('level-item') }"
+          >
             <!--TODO: 这里双向绑定会有问题-->
             <input-text-enter v-model:value="rank.levelName" from="LevelItem"></input-text-enter>
             <!--            <input-text-enter :value="rank.levelName" from="LevelItem"></input-text-enter>-->
@@ -166,9 +192,10 @@
               <n-image
                 :src="img.path"
                 preview-disabled
-                width="80"
+                width="120"
                 class="img-item"
                 object-fit="scale-down"
+                :style="getCardStyle('img-item')"
                 @dblclick="handleItemDbClick(img, index, imgIndex)"
               >
                 <template #error>
@@ -225,6 +252,9 @@
         color: white;
         border-radius: 8px;
         margin-right: 8px;
+        transition:
+          width 0.2s ease,
+          height 0.2s ease;
       }
       .img-row {
         background-color: #fafafa;
@@ -248,6 +278,8 @@
           background: white;
           height: 80px;
           width: 80px;
+          display: flex;
+          justify-content: center;
           &:hover {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
           }
