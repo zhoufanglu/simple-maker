@@ -8,6 +8,7 @@
   import InputTextEnter from '@/components/InputTextEnter.vue'
 
   import { eventBus } from '@/tools/eventBus'
+  import { useCardSize } from '@/hooks/useCardSize'
 
   const message = useMessage()
   const homeStore = useHomeStore()
@@ -119,27 +120,7 @@
   }
 
   // ?卡片尺寸处理
-  const cardSize = homeStore.cardSize
-  const getCardStyle = (type: 'level-item' | 'img-item') => {
-    const sizeMap = {
-      small: 100,
-      normal: 120,
-      large: 200,
-    }
-    const cardSize = sizeMap[homeStore.cardSize] || 120
-    if (type === 'level-item') {
-      return {
-        width: `${cardSize}px`,
-        height: `${cardSize}px`,
-      }
-    } else if (type === 'img-item') {
-      return {
-        width: `${cardSize * 0.8}px`,
-        height: `${cardSize * 0.8}px`,
-      }
-    }
-    return {}
-  }
+  const { getCardStyle } = useCardSize()
 
   onMounted(() => {
     eventBus.on('handleDbClickBottomImg', (img: ImgItem) => {

@@ -9,6 +9,7 @@
 
   import { useHomeStore } from '@/store/home'
   import { eventBus } from '@/tools/eventBus'
+  import { useCardSize } from '@/hooks/useCardSize'
 
   /** ********************图片list模块***********************/
   const homeStore = useHomeStore()
@@ -80,6 +81,9 @@
   const fileUploadRef = ref()
   const debouncedHandleUploadChange = debounce(handleUploadChange, 300)
 
+  // ?卡片尺寸处理
+  const { getCardStyle } = useCardSize()
+
   /** ********************pin***********************/
   const emits = defineEmits(['handleImageBoxHeightChange'])
   const chooseImagesRef = ref<HTMLElement | null>(null)
@@ -107,6 +111,7 @@
             :src="img.path"
             preview-disabled
             width="80"
+            :style="getCardStyle('img-item')"
             class="img-item"
             object-fit="scale-down"
             @dblclick="handleDbClick(img, index)"
@@ -244,6 +249,9 @@
           margin-left: 6px;
           height: 80px;
           width: 80px;
+          transition: all 0.3s ease;
+          display: flex;
+          justify-content: center;
           &:hover {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
           }
