@@ -63,7 +63,8 @@
       const fontSize = 20 // 字体大小
       const padding = 12 // 水印距离图片边界的间距
       context.font = `${fontSize}px ALIMAMAFONT`
-      context.fillStyle = isDark ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.3)'
+      // context.fillStyle = isDark ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.9)'
+      context.fillStyle = '#5386ed'
       context.textAlign = 'right'
       context.textBaseline = 'bottom'
 
