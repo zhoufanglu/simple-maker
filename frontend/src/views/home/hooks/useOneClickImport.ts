@@ -32,6 +32,11 @@ const useOneClickImport = () => {
       name: 'ACE联盟战队队标',
       imgs: getImgPathList('ACE'),
     },
+    {
+      logo: getImageUrl('yin-yu-fei'),
+      name: 'ACE联盟战队队标',
+      imgs: getImgPathList('yin-yu-fei'),
+    },
   ]
 
   function getImgPathList(folderName: FolderName) {
@@ -52,6 +57,9 @@ const useOneClickImport = () => {
         break
       case 'ACE':
         imageFiles = import.meta.glob('@/assets/imgs/ACE/*.{png,jpg,jpeg}', { eager: true })
+        break
+      case 'yin-yu-fei':
+        imageFiles = import.meta.glob('@/assets/imgs/yin-yu-fei/*.{png,jpg,jpeg}', { eager: true })
         break
     }
     return Object.values(imageFiles).map((module) => module.default)
