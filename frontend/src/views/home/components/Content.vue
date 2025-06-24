@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { v4 as uuidv4 } from 'uuid'
   import Draggable from 'vuedraggable'
   import { ImgItem, RankingItem } from '../types'
   import Motion from '@/components/motion'
@@ -46,12 +47,14 @@
     if (rankingRows.value.length === 0) {
       for (let i = 0; i < 4; i++) {
         rankingRows.value.push({
+          id: uuidv4(),
           levelName: defaultLevelList[i],
           items: [],
           bgColor: defaultColorList[i],
         })
       }
     }
+    console.log(55, rankingRows.value)
   }
 
   function handleCreate() {
@@ -63,12 +66,14 @@
     if (deletedLevelList.length !== 0) {
       const colorIndex = defaultLevelList.findIndex((item) => item === deletedLevelList[0])
       rankingRows.value.push({
+        id: uuidv4(),
         levelName: deletedLevelList.shift(),
         items: [],
         bgColor: defaultColorList[colorIndex],
       })
     } else {
       rankingRows.value.push({
+        id: uuidv4(),
         levelName: defaultLevelList[len],
         items: [],
         bgColor: defaultColorList[len],
@@ -103,6 +108,9 @@
     if (isDark) {
       alpha = 0.4
     }
+    if (!hex) {
+      return
+    }
     hex = hex.replace('#', '')
     const r = parseInt(hex.substring(0, 2), 16)
     const g = parseInt(hex.substring(2, 4), 16)
@@ -129,15 +137,15 @@
       ghost-class="ghost"
       animation="200"
       :list="rankingRows"
-      item-key="levelName"
+      item-key="id"
     >
       <template #item="{ element: rank, index }">
         <ul class="rank-row">
           <!--?level-item-->
           <li class="level-item" :style="{ backgroundColor: rank.bgColor }">
             <!--TODO: 这里双向绑定会有问题-->
-            <!--            <input-text-enter v-model:value="rank.levelName" from="LevelItem"></input-text-enter>-->
-            <input-text-enter :value="rank.levelName" from="LevelItem"></input-text-enter>
+            <input-text-enter v-model:value="rank.levelName" from="LevelItem"></input-text-enter>
+            <!--            <input-text-enter :value="rank.levelName" from="LevelItem"></input-text-enter>-->
           </li>
           <!--?img-list-->
           <!--!行内img拖动-->

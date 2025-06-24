@@ -16,7 +16,7 @@
 <template>
   <div class="app" :class="isDark ? 'dark' : ''">
     <n-config-provider :theme="isDark ? darkTheme : null">
-      <n-global-style />
+      <!--      <n-global-style />-->
       <n-message-provider>
         <router-view></router-view>
       </n-message-provider>

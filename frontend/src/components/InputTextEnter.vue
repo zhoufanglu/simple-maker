@@ -20,9 +20,9 @@
     const len = String(text).length
     let fontSize = 0
     if (len >= 0 && len < 4) {
-      fontSize = 36
+      fontSize = 32
     } else if (len >= 4 && len <= 8) {
-      fontSize = 30
+      fontSize = 26
     } else if (len > 8 && len <= 14) {
       fontSize = 20
     } else if (len >= 15) {

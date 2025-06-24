@@ -4,6 +4,7 @@ export interface ImgItem {
 }
 
 export interface RankingItem {
+  id: string
   levelName: string
   items: ImgItem[]
   bgColor: string
@@ -15,4 +16,4 @@ export interface ChooseImageItem {
   imgs: string[]
 }
 
-export type FolderName = 'lol' | 'mapleStory' | 'wukong' | 'PVZ-RH'
+export type FolderName = 'lol' | 'mapleStory' | 'wukong' | 'PVZ-RH' | 'ACE'
