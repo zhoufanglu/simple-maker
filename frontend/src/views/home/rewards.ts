@@ -1,6 +1,11 @@
 // 打赏列表
 const wxRewards = [
   {
+    name: '*欢',
+    money: '0.01',
+    time: '2025-7-01',
+  },
+  {
     name: '*雨',
     money: '9.9',
     time: '2025-4-01',
