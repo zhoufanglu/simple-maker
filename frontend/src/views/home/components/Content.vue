@@ -4,6 +4,7 @@
   import { ImgItem, RankingItem } from '../types'
   import Motion from '@/components/motion'
   import { useMessage } from 'naive-ui'
+  import { NColorPicker } from 'naive-ui'
   import { useHomeStore } from '@/store/home'
   import InputTextEnter from '@/components/InputTextEnter.vue'
 
@@ -42,7 +43,7 @@
   initRankingRows()
   // test
   /* rankingRows.value[0].items.push({ path: defaultImgList[0] })
-  rankingRows.value[0].items.push({ path: defaultImgList[1] }) */
+rankingRows.value[0].items.push({ path: defaultImgList[1] }) */
 
   function initRankingRows() {
     if (rankingRows.value.length === 0) {
@@ -52,6 +53,7 @@
           levelName: defaultLevelList[i],
           items: [],
           bgColor: defaultColorList[i],
+          borderColor: hexToRgba(defaultColorList[i]),
         })
       }
     }
@@ -71,6 +73,7 @@
         levelName: deletedLevelList.shift(),
         items: [],
         bgColor: defaultColorList[colorIndex],
+        borderColor: hexToRgba(defaultColorList[colorIndex]),
       })
     } else {
       rankingRows.value.push({
@@ -78,6 +81,7 @@
         levelName: defaultLevelList[len],
         items: [],
         bgColor: defaultColorList[len],
+        borderColor: hexToRgba(defaultColorList[len]),
       })
     }
   }
@@ -131,6 +135,29 @@
   onUnmounted(() => {
     eventBus.off('handleDbClickBottomImg')
   })
+
+  // ?颜色选择器逻辑
+
+  const handleColorComplete = (color: string, index: number) => {
+    rankingRows.value[index].borderColor = hexToRgba(color)
+  }
+
+  function rgbaStringToHex(rgbaStr: string) {
+    const match = rgbaStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/)
+    if (!match) return null
+
+    const r = parseInt(match[1])
+    const g = parseInt(match[2])
+    const b = parseInt(match[3])
+
+    return (
+      '#' +
+      [r, g, b]
+        .map((x) => x.toString(16).padStart(2, '0'))
+        .join('')
+        .toUpperCase()
+    )
+  }
 </script>
 <template>
   <div v-auto-animate class="content">
@@ -150,6 +177,15 @@
             class="level-item"
             :style="{ backgroundColor: rank.bgColor, ...getCardStyle('level-item') }"
           >
+            <n-color-picker
+              v-model:value="rank.bgColor"
+              class="color-picker-icon"
+              @complete="(color) => handleColorComplete(color, index)"
+            >
+              <template #label>
+                <img src="@/assets/imgs/icon/watercolor.svg" alt="" />
+              </template>
+            </n-color-picker>
             <!--TODO: 这里双向绑定会有问题-->
             <input-text-enter v-model:value="rank.levelName" from="LevelItem"></input-text-enter>
             <!--            <input-text-enter :value="rank.levelName" from="LevelItem"></input-text-enter>-->
@@ -160,7 +196,7 @@
             :style="{
               width:
                 homeStore.modeType === 'edit' ? 'calc(100% - 150px)' : 'calc(100% - 150px + 16px)',
-              borderColor: hexToRgba(rank.bgColor),
+              borderColor: rank?.borderColor || rank.bgColor,
             }"
             class="img-row"
             ghost-class="ghost"
@@ -224,6 +260,7 @@
       align-items: center;
       margin-bottom: 10px;
       .level-item {
+        position: relative;
         flex-shrink: 0;
         height: 100px;
         width: 100px;
@@ -236,6 +273,24 @@
         transition:
           width 0.2s ease,
           height 0.2s ease;
+        .color-picker-icon {
+          position: absolute;
+          top: 2px;
+          right: 2px;
+          cursor: pointer;
+          opacity: 0;
+          transform: scale(0.8);
+          transition: all 0.5s ease;
+          width: 20px;
+          height: 20px;
+        }
+        &:hover {
+          .color-picker-icon {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+          }
+        }
       }
       .img-row {
         background-color: #fafafa;

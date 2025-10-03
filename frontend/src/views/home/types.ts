@@ -5,9 +5,10 @@ export interface ImgItem {
 
 export interface RankingItem {
   id: string
-  levelName: string
-  items: ImgItem[]
-  bgColor: string
+  levelName: string // 级别名称
+  items: ImgItem[] // 该级别下的图片列表
+  bgColor: string // 背景颜色
+  borderColor: string // 边框颜色 - 默认为背景颜色的 80%
 }
 
 export interface ChooseImageItem {
