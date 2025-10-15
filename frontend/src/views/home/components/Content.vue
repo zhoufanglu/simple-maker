@@ -40,6 +40,24 @@
 
   // rankingRows.value = []
 
+  const isDark = computed(() => {
+    return homeStore.skin === 'dark'
+  })
+
+  const hexToRgba = (hex: string, alpha = 0.2) => {
+    if (isDark) {
+      alpha = 0.4
+    }
+    if (!hex) {
+      return
+    }
+    hex = hex.replace('#', '')
+    const r = parseInt(hex.substring(0, 2), 16)
+    const g = parseInt(hex.substring(2, 4), 16)
+    const b = parseInt(hex.substring(4, 6), 16)
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`
+  }
+
   initRankingRows()
   // test
   /* rankingRows.value[0].items.push({ path: defaultImgList[0] })
@@ -103,24 +121,6 @@ rankingRows.value[0].items.push({ path: defaultImgList[1] }) */
     const deletedImgs = rankingRows.value[index]
     emits('handleDelRowImages', deletedImgs)
     rankingRows.value[index].items = []
-  }
-
-  const isDark = computed(() => {
-    return homeStore.skin === 'dark'
-  })
-
-  const hexToRgba = (hex: string, alpha = 0.2) => {
-    if (isDark) {
-      alpha = 0.4
-    }
-    if (!hex) {
-      return
-    }
-    hex = hex.replace('#', '')
-    const r = parseInt(hex.substring(0, 2), 16)
-    const g = parseInt(hex.substring(2, 4), 16)
-    const b = parseInt(hex.substring(4, 6), 16)
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`
   }
 
   // ?卡片尺寸处理
