@@ -89,12 +89,53 @@
   const chooseImagesRef = ref<HTMLElement | null>(null)
   const { isPin } = usePin(emits, chooseImagesRef)
 
+  // Drag & Drop state and handlers: support dropping image files onto the whole .choose-images area
+  const isDragging = ref(false)
+
+  const onDragOver = (e: DragEvent) => {
+    // show copy cursor and visual state
+    if (e.dataTransfer) e.dataTransfer.dropEffect = 'copy'
+    isDragging.value = true
+  }
+
+  const onDragLeave = (_e: DragEvent) => {
+    // hide visual state when leaving
+    isDragging.value = false
+  }
+
+  const onDrop = async (e: DragEvent) => {
+    isDragging.value = false
+    const dt = e.dataTransfer
+    if (!dt) return
+    const files = Array.from(dt.files || []).filter((f) => /^image\//.test(f.type))
+    if (files.length === 0) return
+    // convert to base64 and add
+    const imgs: ImgItem[] = await Promise.all(
+      files.map(async (f) => ({
+        path: await fileToBase64(f),
+        name: f.name || '',
+      })),
+    )
+    addImages(imgs)
+  }
+
   defineExpose({
     addImages,
   })
 </script>
 <template>
-  <div ref="chooseImagesRef" class="choose-images" :class="isPin ? 'pin-choose-images' : null">
+  <div
+    ref="chooseImagesRef"
+    class="choose-images"
+    :class="[
+      isPin ? 'pin-choose-images' : null,
+      isDragging ? 'dragging' : null,
+      images && images.length === 0 ? 'empty' : null,
+    ]"
+    @dragover.prevent="onDragOver"
+    @dragleave.prevent="onDragLeave"
+    @drop.prevent="onDrop"
+  >
     <Draggable
       v-auto-animate
       class="img-row dark-row"
@@ -198,6 +239,36 @@
     align-items: flex-start;
     position: relative;
     transition: all 0.3s ease;
+
+    // Background hint text: only visible when empty or during dragging
+    &::after {
+      display: none;
+      content: '图片拖到这里';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: rgba(0, 0, 0, 0.2);
+      font-size: 28px;
+      font-weight: 600;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 0; // sits behind content
+      user-select: none;
+    }
+
+    &.empty::after {
+      display: block;
+    }
+
+    &.dragging::after {
+      display: block;
+      content: '释放上传图片';
+      color: rgba(83, 134, 237, 0.9);
+      font-size: 30px;
+      transform: translate(-50%, -50%) scale(1.03);
+    }
+
     .img-row {
       // border: solid 1px red !important;
       background-color: #fafafa;
@@ -319,6 +390,11 @@
     .img-row {
       max-height: 300px;
     }
+  }
+  .dragging {
+    opacity: 0.8;
+    // add any other styles to indicate dragging state, e.g.:
+    // border: 2px dashed #5386ed;
   }
 </style>
 <style lang="scss">
