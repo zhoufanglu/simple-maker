@@ -2,6 +2,7 @@
   import { useHomeStore } from '@/store/home'
   import Motion from '@/components/motion'
   import { useMessage } from 'naive-ui'
+  import { useExportAndImport } from '@/views/home/hooks/useExportAndImport'
 
   import { wxRewards } from '@/views/home/rewards'
 
@@ -10,6 +11,8 @@
   const message = useMessage()
   const wxQR = new URL('@/assets/imgs/pay/wxQR.JPG', import.meta.url).href
   const homeStore = useHomeStore()
+  const { templateInputRef, handleExport, handleImport, onTemplateFileChange } =
+    useExportAndImport(message)
 
   const goGithub = () => {
     window.open('https://github.com/zhoufanglu/simple-maker/tree/main', '_blank')
@@ -63,6 +66,16 @@
       click: () => handleDownLoad(),
     },
     {
+      icon: '&#xe600;',
+      tip: '导出模板',
+      click: () => handleExport(),
+    },
+    {
+      icon: '&#xe601;',
+      tip: '导入模板',
+      click: () => handleImport(),
+    },
+    {
       icon: '&#xe85a;',
       tip: 'Github',
       click: () => goGithub(),
@@ -86,6 +99,13 @@
 </script>
 <template>
   <div class="p-header">
+    <input
+      ref="templateInputRef"
+      type="file"
+      accept=".json,application/json"
+      style="display: none"
+      @change="onTemplateFileChange"
+    />
     <div
       :style="{
         visibility: homeStore.modeType === 'edit' ? 'visible' : 'hidden',
@@ -97,6 +117,7 @@
         :src="
           homeStore.skin !== 'dark' ? '/img/simple-logo-all.svg' : '/img/simple-logo-all-white.svg'
         "
+        alt="simple maker"
         @click="goGithub()"
       />
     </div>

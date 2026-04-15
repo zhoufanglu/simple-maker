@@ -175,8 +175,11 @@
         :on-change="debouncedHandleUploadChange"
         multiple
       >
-        <div class="import-btn">
-          <i class="iconfont">&#xe613;</i>
+        <div class="import-btn-one-click">
+          <span>本</span>
+          <span>地</span>
+          <span>导</span>
+          <span>入</span>
         </div>
       </n-upload>
       <div class="import-btn-one-click" @click="openOneClick">

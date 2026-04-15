@@ -1,5 +1,8 @@
 import type { VNode } from 'vue'
-import { type MessageHandler, ElMessage } from 'element-plus'
+import { createDiscreteApi } from 'naive-ui'
+import type { MessageReactive } from 'naive-ui'
+
+const { message: nMessage } = createDiscreteApi(['message'])
 
 type messageStyle = 'el' | 'antd'
 type messageTypes = 'info' | 'success' | 'warning' | 'error'
@@ -26,7 +29,7 @@ interface MessageParams {
   /** 合并内容相同的消息，不支持 `VNode` 类型的消息，默认值 `false` */
   grouping?: boolean
   /** 关闭时的回调函数, 参数为被关闭的 `message` 实例 */
-  onClose?: Function | null
+  onClose?: (() => void) | null
 }
 
 /** 用法非常简单，参考 https://github.com/pure-admin/vue-pure-admin/blob/main/src/views/components/message.vue 文件 */
@@ -37,42 +40,19 @@ interface MessageParams {
 const message = (
   message: string | VNode | (() => VNode),
   params?: MessageParams,
-): MessageHandler => {
+): MessageReactive => {
   if (!params) {
-    return ElMessage({
-      message,
-      type: 'success',
-      customClass: 'pure-message',
+    return nMessage.success(message as any, {
+      duration: 2000,
     })
   } else {
-    const {
-      icon,
-      type = 'success',
-      dangerouslyUseHTMLString = false,
-      customClass = 'antd',
-      duration = 2000,
-      showClose = false,
-      center = false,
-      offset = 20,
-      appendTo = document.body,
-      grouping = false,
-      onClose,
-    } = params
+    const { type = 'success', duration = 2000, showClose = false, onClose } = params
 
-    return ElMessage({
-      message,
-      type,
-      icon,
-      dangerouslyUseHTMLString,
+    void onClose
+
+    return nMessage[type](message as any, {
       duration,
-      showClose,
-      center,
-      offset,
-      appendTo,
-      grouping,
-      // 全局搜 pure-message 即可知道该类的样式位置
-      customClass: customClass === 'antd' ? 'pure-message' : '',
-      onClose: () => (isFunction(onClose) ? onClose() : null),
+      closable: showClose,
     })
   }
 }
@@ -80,9 +60,9 @@ const message = (
 /**
  * 关闭所有 `Message` 消息提示函数
  */
-const closeAllMessage = (): void => ElMessage.closeAll()
+const closeAllMessage = (): void => nMessage.destroyAll()
 
-function isFunction(fn) {
+function isFunction(fn: unknown): fn is (...args: unknown[]) => unknown {
   return typeof fn === 'function'
 }
 
