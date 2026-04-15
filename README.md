@@ -11,22 +11,21 @@
 ![home](https://github.com/zhoufanglu/simple-maker/blob/main/preview/app-use-times.png)
 ![how-to-use](https://github.com/zhoufanglu/simple-maker/blob/main/preview/simple-maker-demo.gif)
 
+# 功能 (features)
+- 支持亮/暗色切换 (dark/light mode)
+- 自定义等级、图片、标题、颜色 (custom level, picture, title, color)
+- 支持拖拽排序 (drag and drop sorting)
+- 支持导入导出数据 (import and export data)
+
 # 目录介绍(directory) 
 - axure-rp - 原型目录
 - frontend - 前端目录
 - server - 后端目录
 
-# TODO
-- [ ] 图片文件存储选择
-- [ ] 中英文功能
-
-# 优化(optimize)
-- [issue-1](https://github.com/zhoufanglu/simple-maker/issues/1) - 拖动过程中删除错位 
-
 # 自动发布脚本前端(deploy script)
 - ./frontend/deploy.sh
 
-# release
+# 更新版本(release)
 - [release](https://github.com/zhoufanglu/simple-maker/releases)
 
 # 💌 感谢(Special Thanks)
