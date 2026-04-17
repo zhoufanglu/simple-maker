@@ -58,6 +58,9 @@
       .content,
       .choose-images {
         background: #333 !important;
+        &::after {
+          color: $text_light_color !important;
+        }
         .import-btn-one-click,
         .delete-all {
           span {
