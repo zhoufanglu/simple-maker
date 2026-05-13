@@ -3,12 +3,12 @@
   import Draggable from 'vuedraggable'
   import { ImgItem } from '@/views/home/types'
   import type { UploadFileInfo } from 'naive-ui'
+  import NImagePreview from 'naive-ui/lib/image/src/ImagePreview'
   import { debounce, fileToBase64 } from '@/tools'
   import { useOneClickImport } from '@/views/home/hooks/useOneClickImport'
   import { usePin } from '@/views/home/hooks/usePin'
 
   import { useHomeStore } from '@/store/home'
-  import { eventBus } from '@/tools/eventBus'
   import { useCardSize } from '@/hooks/useCardSize'
 
   /** ********************图片list模块***********************/
@@ -34,9 +34,14 @@
     images.value = [...imgs, ...images.value]
   }
 
-  const handleDbClick = (img: ImgItem, index: number) => {
-    images.value.splice(index, 1)
-    eventBus.emit('handleDbClickBottomImg', img)
+  const previewRef = ref<{
+    setPreviewSrc: (src?: string) => void
+    toggleShow: () => void
+  } | null>(null)
+
+  const handleDbClick = (img: ImgItem) => {
+    previewRef.value?.setPreviewSrc(img.path)
+    previewRef.value?.toggleShow()
   }
 
   const handleUploadChange = async (options: {
@@ -155,7 +160,7 @@
             :style="getCardStyle('img-item')"
             class="img-item"
             object-fit="scale-down"
-            @dblclick="handleDbClick(img, index)"
+            @dblclick="handleDbClick(img)"
           >
             <template #error>
               <i class="iconfont" style="font-size: 80px">&#xe65b;</i>
@@ -197,6 +202,7 @@
         <!--        <i class="iconfont">&#xe809;</i>-->
       </div>
     </Motion>
+    <n-image-preview ref="previewRef" cls-prefix="n" :show-toolbar="true" />
     <!--?Pin按钮-->
     <div class="pin-btn" @click="isPin = !isPin">
       <i v-show="!isPin" class="pin iconfont">&#xe864;</i>

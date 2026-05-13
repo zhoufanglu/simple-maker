@@ -7,8 +7,8 @@
   import { NColorPicker } from 'naive-ui'
   import { useHomeStore } from '@/store/home'
   import InputTextEnter from '@/components/InputTextEnter.vue'
+  import NImagePreview from 'naive-ui/lib/image/src/ImagePreview'
 
-  import { eventBus } from '@/tools/eventBus'
   import { useCardSize } from '@/hooks/useCardSize'
 
   const message = useMessage()
@@ -30,13 +30,6 @@
   ]
   const defaultLevelList = ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
   const deletedLevelList = []
-  // 模拟图片数据
-  const defaultImgList = [
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=1',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=2',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=3',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=4',
-  ]
 
   // rankingRows.value = []
 
@@ -104,7 +97,12 @@ rankingRows.value[0].items.push({ path: defaultImgList[1] }) */
     }
   }
 
-  const emits = defineEmits(['handleDelRow', 'handleDelRowImages', 'handleItemDbClick'])
+  const emits = defineEmits(['handleDelRow', 'handleDelRowImages'])
+
+  const previewRef = ref<{
+    setPreviewSrc: (src?: string) => void
+    toggleShow: () => void
+  } | null>(null)
 
   const handleDelRow = (index: number) => {
     const curRow: RankingItem = rankingRows.value[index]
@@ -112,9 +110,9 @@ rankingRows.value[0].items.push({ path: defaultImgList[1] }) */
     emits('handleDelRow', curRow)
     rankingRows.value.splice(index, 1)
   }
-  const handleItemDbClick = (img: RankingItem, index: number, imgIndex: number) => {
-    rankingRows.value[index].items.splice(imgIndex, 1)
-    emits('handleItemDbClick', img)
+  const handleItemDbClick = (img: ImgItem) => {
+    previewRef.value?.setPreviewSrc(img.path)
+    previewRef.value?.toggleShow()
   }
 
   const handleDelRowImages = (index: number) => {
@@ -126,37 +124,11 @@ rankingRows.value[0].items.push({ path: defaultImgList[1] }) */
   // ?卡片尺寸处理
   const { getCardStyle } = useCardSize()
 
-  onMounted(() => {
-    eventBus.on('handleDbClickBottomImg', (img: ImgItem) => {
-      rankingRows.value[0].items.push({ path: img.path })
-    })
-  })
-
-  onUnmounted(() => {
-    eventBus.off('handleDbClickBottomImg')
-  })
 
   // ?颜色选择器逻辑
 
   const handleColorComplete = (color: string, index: number) => {
     rankingRows.value[index].borderColor = hexToRgba(color)
-  }
-
-  function rgbaStringToHex(rgbaStr: string) {
-    const match = rgbaStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/)
-    if (!match) return null
-
-    const r = parseInt(match[1])
-    const g = parseInt(match[2])
-    const b = parseInt(match[3])
-
-    return (
-      '#' +
-      [r, g, b]
-        .map((x) => x.toString(16).padStart(2, '0'))
-        .join('')
-        .toUpperCase()
-    )
   }
 </script>
 <template>
@@ -205,7 +177,7 @@ rankingRows.value[0].items.push({ path: defaultImgList[1] }) */
             group="img-row"
             itemKey="path"
           >
-            <template #item="{ element: img, index: imgIndex }">
+            <template #item="{ element: img }">
               <n-image
                 :src="img.path"
                 preview-disabled
@@ -213,7 +185,7 @@ rankingRows.value[0].items.push({ path: defaultImgList[1] }) */
                 class="img-item"
                 object-fit="scale-down"
                 :style="getCardStyle('img-item')"
-                @dblclick="handleItemDbClick(img, index, imgIndex)"
+                @dblclick="handleItemDbClick(img)"
               >
                 <template #error>
                   <i class="iconfont" style="font-size: 80px">&#xe65b;</i>
@@ -244,6 +216,7 @@ rankingRows.value[0].items.push({ path: defaultImgList[1] }) */
     <div v-if="homeStore.modeType === 'edit'" class="add-action" @click="handleCreate">
       <i class="iconfont">&#xe613;</i>
     </div>
+    <n-image-preview ref="previewRef" cls-prefix="n" :show-toolbar="true" />
   </div>
 </template>
 
