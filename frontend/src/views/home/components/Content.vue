@@ -17,12 +17,12 @@
   // const rankingRows = ref<RankingItem[]>([])
   const { rankingRows } = storeToRefs(homeStore)
   const defaultColorList = [
-    '#F97875', // 纯红
-    '#FF7F00', // 橙色
-    '#73D13D', // 纯绿
-    '#69C0FF', // 纯蓝
-    '#80bcbc', // 青色
-    '#8B00FF', // 紫罗兰
+    '#F84C4E', // 纯红
+    '#F9822C', // 橙色
+    '#EFBE00', // 纯绿
+    '#78D163', // 纯蓝
+    '#2F9FE1', // 青色
+    '#854BD2', // 紫罗兰
     '#FF1493', // 深粉色
     '#FFD700', // 金色
     '#00FA9A', // 薄荷绿
@@ -123,7 +123,6 @@ rankingRows.value[0].items.push({ path: defaultImgList[1] }) */
 
   // ?卡片尺寸处理
   const { getCardStyle } = useCardSize()
-
 
   // ?颜色选择器逻辑
 
