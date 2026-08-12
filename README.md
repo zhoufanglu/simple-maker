@@ -42,4 +42,4 @@ Thanks to [everyone](https://github.com/zhoufanglu/simple-maker/graphs/contribut
 - [League_Of_Legends_Assets](https://github.com/TheePepS/League_Of_Legends_Assets)
 
 # Star History
-[![Star History Chart](https://www.star-history.com/?repos=zhoufanglu%2Fsimple-maker&type=timeline&legend=top-left)]([https://www.star-history.com/#zhoufanglu/simple-maker&Date](https://www.star-history.com/?repos=zhoufanglu%2Fsimple-maker&type=timeline&legend=top-left))
+[![Star History](https://img.shields.io/badge/Star%20History-View%20Chart-blue?style=for-the-badge&logo=github)](https://www.star-history.com/?repos=zhoufanglu%2Fsimple-maker&type=timeline&legend=top-left)
